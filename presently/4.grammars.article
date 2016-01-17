@@ -1,0 +1,41 @@
+{
+    "type": "article",
+    "source": "draft:\n...................\nContext Free Languages",
+    "children": [
+        {
+            "type": "page",
+            "source": "Towards Context Free Languages",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Beyond regular languages",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n.........\nIs the C programming language regular?",
+                                    "uuid": "ebe68e44-ba83-41cf-a68b-91d35337520f",
+                                    "version": 68
+                                }
+                            ],
+                            "uuid": "ab9b5ff6-3f4f-43a3-b544-3d1b6f447ed8",
+                            "version": 68
+                        }
+                    ],
+                    "uuid": "c7b3126d-87ca-4e60-98c1-c4c4226490d4",
+                    "version": 118
+                }
+            ],
+            "uuid": "2718a849-2542-490c-bbba-820360b98b39",
+            "version": 152
+        }
+    ],
+    "uuid": "7beab936-509a-4d01-9d16-e026cd0d58a2",
+    "modified": true,
+    "version": 223,
+    "history": 3
+}
