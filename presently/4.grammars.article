@@ -1,6 +1,6 @@
 {
     "type": "article",
-    "source": "draft:\n...................\nContext Free Languages",
+    "source": "Context Free Languages",
     "children": [
         {
             "type": "page",
@@ -8,7 +8,7 @@
             "children": [
                 {
                     "type": "section",
-                    "source": "Beyond regular languages",
+                    "source": "math: 1\n..........\nBeyond regular languages",
                     "children": [
                         {
                             "type": "box",
@@ -17,25 +17,389 @@
                             "children": [
                                 {
                                     "type": "markdown",
-                                    "source": "c: banner\n.........\nIs the C programming language regular?",
-                                    "uuid": "ebe68e44-ba83-41cf-a68b-91d35337520f",
-                                    "version": 68
+                                    "source": "c: banner\n.........\nIs the C programming language regular?\n\nShort answer: NO",
+                                    "uuid": "0090dac8-bfa6-4dbc-bdf7-71ccfaa1c959",
+                                    "version": 0
                                 }
                             ],
-                            "uuid": "ab9b5ff6-3f4f-43a3-b544-3d1b6f447ed8",
-                            "version": 68
+                            "uuid": "97c01de8-a10d-4934-b898-7b9024232658",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "A basic property of the C-programming language:\n> Brackets are to be balanced.\n",
+                                    "uuid": "bbbb885d-a3db-4cf4-9ec7-76b8120a593f",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2ec4cb78-6042-477b-900b-0d060be41a8e",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Consider the following language:\n\n- Balanced brackets:\n  > All strings that start with open brackets, followed by the same number of close brackets.\n  > \n  > Example: `()`, `(())`, `((...()...))`\n  >\n  > Let this language be called $L_\\mathrm{brackets}$.\n",
+                                    "uuid": "b667d286-a17d-49ed-a593-ec24c4ab35f7",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "73854c2c-b34f-42b9-9571-54ff233b6902",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> The language $L_\\mathrm{brackets}$ is _not_ regular.",
+                                    "uuid": "c895b630-620d-4e59-9759-89d976f4ef9a",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/16QUn5LBBsBryc-jqiDCFjQ-lX3L5z6YTi0ZVX4fJKfc/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "77e768e7-a6d9-4d0b-82dd-17dffd2bf27f",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "c5d3f883-c1d6-4f25-88c2-ca0514af007c",
+                            "version": 0
                         }
                     ],
-                    "uuid": "c7b3126d-87ca-4e60-98c1-c4c4226490d4",
-                    "version": 118
+                    "uuid": "6de2afb7-3bd2-4c7c-a571-670d5f751741",
+                    "version": 0
                 }
             ],
-            "uuid": "2718a849-2542-490c-bbba-820360b98b39",
-            "version": 152
+            "uuid": "0c88a381-0200-4da9-8dbd-3c59e67e9f2c",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Context Free Grammar",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math: 1\n............\nMotivation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 2",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Context free grammar (CFG) is yet another way of defining languages.",
+                                    "uuid": "478e27a6-e670-42ff-b724-314cd311f6fa",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> \n> 1. CFG is strictly more expressive than regular languages.\n> 2. $L_\\mathrm{brackets}$ can be defined by a CFG.\n\n",
+                                    "uuid": "1a3ab03a-c733-49f4-bff9-d5f0011fa4e3",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "ed885480-ebe9-45de-a8c1-682f02627591",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "6a362431-2c0c-4fbe-b97b-c86f3d635d28",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n.........\nDefinition",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Symbols*:\n\n> There are two types of symbols.\n> 1. Terminals, $\\Sigma_0$<br>\n>    Terminal symbols are the basic symbols from which strings are formed.\n> 2. Nonterminals, $\\Sigma_1$ <br>\n>    Unlike regular expressions, CFG allows _syntactic variables_ to represent intermediate languages.  Nonterminal symbols are reserved to represent the syntatic variables.\n\nIt is required that $\\Sigma_0\\cap\\Sigma_1= \\emptyset$.",
+                                    "uuid": "00b17548-d90b-4476-b4a4-c7dd39906ce6",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "*Start symbol*\n\n> There is a distinguished symbol $S\\in\\Sigma_1$ as the _start symbol_.",
+                                    "uuid": "54511ff0-504d-4e0c-a2a6-c8528dbaab61",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "d7919796-0d05-4386-ae04-832f4e46d2a4",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Productions*\n\n> A production is a rule how terminals and nonterminals form strings.\n> \n> A production $p$ consists of:\n> 1. A nonterminal called the _head_ of the production: $\\mathrm{head}(p)\\in\\Sigma_1$.\n> 2. A _body_ of the production: $\\mathrm{body}(p)\\in(\\Sigma_0\\cup\\Sigma_1)^*$.  The body is a finite (possibly empty) string of terminals or nonterminals.\n\n",
+                                    "uuid": "1618271c-768c-4826-9703-711043716b9e",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css: \n  color: blue\n................\nThe convention is to write a production as: \n$$\\mathrm{head}(p): \\mathrm{body}(p)$$",
+                                    "uuid": "91777e81-c967-4534-a462-cb76b3bd1cc1",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "d12f4572-8c34-4ffa-9355-a4111d453e82",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> *Context Free Grammar* <br>\n> A CFG is defined by the symbols $\\Sigma_0\\cup\\Sigma_1$, the start symbol $S\\in\\Sigma_1$ and a set of productions, `$P = \\{p_1, p_2, \\dots, p_k\\}$`",
+                                    "uuid": "0b8d8f07-a478-40e8-b731-f77388abc368",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "ca441cb8-0b43-4423-8809-1eb40cfb64ba",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "8bfcc377-6232-4b0b-929e-22b516f62ee2",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n...........\nDerivation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "A CFG, $G$, defines a language $L(G)$.",
+                                    "uuid": "d89feb3e-75e9-42bb-9b81-3f4d8fa3e765",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "11774e40-aa73-40f7-952c-b362a74bba13",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Intuition:\n\n- $E: abc$\n> It states that the concatenation of the symbols $a,b,c$ belongs to the language $L(E)$.\n\n- $E: aFc$\n> It states that $a$ concatenating with a string in $L(F)$ and then concatenating with $c$ belongs to the language $L(E)$.\n\n- $E: aE$\n> This says that if you take string from $L(E)$ and prepend it with $a$, then you have another string also in $L(E)$.",
+                                    "uuid": "021fb469-21d4-4e78-84f6-9abf1a52b246",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "c725da3c-d5bb-4664-a7ad-599c61ac5500",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Derivation*\n\nDerivation is a formal definition of the language of a CFG.",
+                                    "uuid": "ef7c3d18-d911-4f0a-83a5-3d1cca355f18",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "81aec5fe-6fd3-4c1e-8693-c7f980ec1e02",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 3 2",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Derivation*\n\n1. A production $E:\\mathrm{body}(p)$ means that whenever you see $E$ in a string, you can replace it by the string $\\mathrm{body}(p)$.\n2. Given a string $s\\in(\\Sigma_0\\cup\\Sigma_1)^*$, one can pick a nonterminal $X\\in s$, and a production rule $p$ such that $\\mathrm{head}(p) = X$, and derive a new string $s'$ obtained by replacing one (or more) occurrence of $X$ with $\\mathrm{body}(p)$.\n\nWe write it as:\n\n  $$s\\Rightarrow_{p,i} s'$$\n\nThis reads: we replace the occurrence of $\\mathrm{head}(p)$ at the position $i$ with the body of $p$.\nThe subscript is omitted if it is understood.",
+                                    "uuid": "bdac0ba4-3326-4491-ab0f-5a12a6c57a07",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Example:\n\n- Grammar:\n> ~~~\n  E: ab\n  E: aEb\n  ~~~\n\n- Some derivations\n  > 1. `E => aEb`\n  > 2. `E => ab`\n  > 3. `aEb => aabb`",
+                                    "uuid": "c0abb91f-5c3f-4c94-a130-50df944f22d3",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7442fa39-7bd8-4fcd-a22d-e2d3125fc83b",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Derivation*\n\nWe can generalize the $\\Rightarrow$ relation to the transitive closure $\\Rightarrow^*$ as follows:\n\n1. `$s\\Rightarrow^* s$` for all strings in `$(\\Sigma_0\\cup\\Sigma_1)^*$`\n2. If `$s\\Rightarrow^* u$ and $u\\Rightarrow v$`, then `$s\\Rightarrow^* u$`.",
+                                    "uuid": "52b58afd-e08c-4807-8c4a-035840778d1d",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Example:\n\n> Since `E => aEb` and `aEb => aabb`, we conclude:\n>\n> `E =>* aabb`.\n",
+                                    "uuid": "c8f77747-8223-4fd2-a4eb-c8bdb97c04e0",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2130b345-0b62-49f0-85d5-7eb013a824d5",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "156d5e5e-b0e1-4661-9253-dfdfbad27629",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n.............\nLanguage of CFG",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "Strings that can be derived from $S$ are _significant_.",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "\n> <note/> Given a string `$\\alpha\\in(\\Sigma_0\\cup\\Sigma_1)^*$`.  We say that $\\alpha$ is in sentential form of `$G$ if $S\\Rightarrow^*\\alpha$`.  If $\\alpha$ is in sentential form and `$\\alpha\\in\\Sigma_0^*$`, then $\\alpha$ is a sentence of $G$.\n\n",
+                                    "uuid": "b20c01ed-9b90-4a59-84ad-e9a1d6023c0c",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> **$L(G) = $ all sentences of $G$.**\n",
+                                    "uuid": "fde4f5b0-57be-4d9d-8cc5-e38ae4a0594c",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "35031295-cea7-4e05-a8a1-c7bf14e3a5e0",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "79a31dac-4fef-4e25-8b6f-0ce7e532eedc",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n..............\nExamples",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Let's express $L_\\mathrm{bracket}$ using a CFG.\n\n~~~\nS : ()\nS : (S)\n~~~",
+                                    "uuid": "7daac3e6-bb3b-4db6-abbe-5e3e80c3eb46",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  color: blue\n.................\n_Challenge:_\n\nConvince yourself that this grammar expresses $L_\\mathrm{bracket}$.",
+                                    "uuid": "7fdeb861-297e-4d4f-9c9b-ebe54d991a4b",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "d81f3543-9697-418f-83cb-9562959b2eef",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "9ff0bc96-8c29-44c3-b800-692bfb5cc204",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n.............\nConvention",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "If multiple productions: $p_1, p_2, p_3, \\dots$ share the same head.  Then we can write them as a single _alternation_ in the form of:\n\n~~~\nS : $\\mathrm{body}(p_1)$ | $\\mathrm{body}(p_2)$ | $\\mathrm{body}(p_3)$ | ...\n~~~\n\nOr often in multiple lines:\n\n~~~\nS : $\\mathrm{body}(p_1)$ \n  | $\\mathrm{body}(p_2)$ \n  | $\\mathrm{body}(p_3)$ | ...\n~~~\n",
+                                    "uuid": "d213c365-442d-4770-9cf3-4fdbf414ae94",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Using the alternation notation, we can define $L_\\mathrm{bracket}$ simply as:\n\n~~~\nS : (S)\n  | ()\n~~~\n",
+                                    "uuid": "c61af0cb-2717-4d6b-8e7d-ea5f60c9ac78",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "e46f3a75-c026-4f77-9d3b-0c0ca3143bbe",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "da4ec885-ff33-4237-9e7d-4aadc9ab3bdf",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Regular expression and CFG",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "1. We have seen that CFG can express non-regular languages.\n2. Can CFG express all regular languages?",
+                                    "uuid": "59b427c5-c13e-4d84-aa79-5a12bcb8ce50",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n............\nYes.  Can we prove it?",
+                                    "uuid": "f034ae9b-c19e-425d-9b41-1e5ae3d199a2",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "0030c8bb-1851-4f1c-a0b8-246c41cc01be",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "53fd57f6-8e22-4145-bc7a-5390d79397a2",
+                    "version": 0
+                }
+            ],
+            "uuid": "92fc89c1-c995-4213-84c2-9103c0cf4414",
+            "version": 0
         }
     ],
-    "uuid": "7beab936-509a-4d01-9d16-e026cd0d58a2",
+    "uuid": "edb05c92-9c5e-45ff-8626-fbf8dd1d6d98",
     "modified": true,
-    "version": 223,
+    "version": 4,
     "history": 3
 }
