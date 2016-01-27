@@ -1,0 +1,126 @@
+{
+    "type": "article",
+    "source": "Reading Assignment",
+    "children": [
+        {
+            "type": "page",
+            "source": "On Regular Languages & Regular Expression",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n........\nSection 3.3.2",
+                                    "uuid": "e12b5c20-9ce0-40d7-9a4d-0d8534226f4d",
+                                    "version": 23
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "This section provides a brief introduction to the Kleene operators - just enough to motivate the syntax design of regular expressions.",
+                                    "uuid": "0a931fe0-5967-4999-9b49-2f60a55c06bc",
+                                    "version": 145
+                                }
+                            ],
+                            "uuid": "7f6713a9-57ab-4bb1-838f-a80fcdf8827a",
+                            "version": 185
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n........\nSection 3.3.3 -- 3.3.5",
+                                    "uuid": "30b1ea27-5e0d-468f-860e-72accf8ff928",
+                                    "version": 69
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "In-depth discussions on regular expressions.",
+                                    "uuid": "a251966e-0cd8-4da4-8c08-aad2a848aef8",
+                                    "version": 72
+                                }
+                            ],
+                            "uuid": "6556f53a-eec3-42a1-a4f5-41b4eaba63e9",
+                            "version": 156
+                        }
+                    ],
+                    "uuid": "3846179c-f31d-45a3-8c3a-d681d9ab90ef",
+                    "version": 357
+                }
+            ],
+            "uuid": "7403767c-c5bc-47ec-8679-24e53d1c1e75",
+            "version": 408
+        },
+        {
+            "type": "page",
+            "source": "On Finite Automata",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n........\nSection 3.6",
+                                    "uuid": "99def134-9ba3-4fc5-bae6-214da6490797",
+                                    "version": 18
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Discussions on NFA, DFA and their acceptance of strings.",
+                                    "uuid": "b1fdf268-29cf-488e-8557-dabfdae3129e",
+                                    "version": 62
+                                }
+                            ],
+                            "uuid": "02f44618-813b-46c5-9163-8017604cb967",
+                            "version": 84
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n........\nSection 3.7",
+                                    "uuid": "dfa06932-2f17-4a7a-96da-55303623f9b0",
+                                    "version": 5
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Simulation and conversion between NFA and regular expression",
+                                    "uuid": "85fd78c4-369e-4e8d-8862-627cf46dfb68",
+                                    "version": 76
+                                }
+                            ],
+                            "uuid": "1ec355f5-29ba-4d91-87da-97b799684c4a",
+                            "version": 82
+                        }
+                    ],
+                    "uuid": "1e325c9d-9d77-4766-95e1-b31c5c39af4b",
+                    "version": 162
+                }
+            ],
+            "uuid": "266b6032-f319-4878-848c-8f70414c8069",
+            "version": 188
+        }
+    ],
+    "uuid": "f40c0dc8-7501-4bf9-bce3-3cc1bbd963be",
+    "modified": true,
+    "history": 6,
+    "version": 622
+}

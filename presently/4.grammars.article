@@ -259,9 +259,9 @@
                             "children": [
                                 {
                                     "type": "markdown",
-                                    "source": "*Derivation*\n\nWe can generalize the $\\Rightarrow$ relation to the transitive closure $\\Rightarrow^*$ as follows:\n\n1. `$s\\Rightarrow^* s$` for all strings in `$(\\Sigma_0\\cup\\Sigma_1)^*$`\n2. If `$s\\Rightarrow^* u$ and $u\\Rightarrow v$`, then `$s\\Rightarrow^* u$`.",
+                                    "source": "*Derivation*\n\nWe can generalize the $\\Rightarrow$ relation to the transitive closure $\\Rightarrow^*$ as follows:\n\n1. `$s\\Rightarrow^* s$` for all strings in `$(\\Sigma_0\\cup\\Sigma_1)^*$`\n2. If `$s\\Rightarrow^* u$ and $u\\Rightarrow v$`, then `$s\\Rightarrow^* v$`.",
                                     "uuid": "52b58afd-e08c-4807-8c4a-035840778d1d",
-                                    "version": 0
+                                    "version": 2
                                 },
                                 {
                                     "type": "markdown",
@@ -271,11 +271,11 @@
                                 }
                             ],
                             "uuid": "2130b345-0b62-49f0-85d5-7eb013a824d5",
-                            "version": 0
+                            "version": 2
                         }
                     ],
                     "uuid": "156d5e5e-b0e1-4661-9253-dfdfbad27629",
-                    "version": 0
+                    "version": 2
                 },
                 {
                     "type": "section",
@@ -395,11 +395,11 @@
                 }
             ],
             "uuid": "92fc89c1-c995-4213-84c2-9103c0cf4414",
-            "version": 0
+            "version": 2
         }
     ],
     "uuid": "edb05c92-9c5e-45ff-8626-fbf8dd1d6d98",
     "modified": true,
-    "version": 4,
+    "version": 2,
     "history": 3
 }

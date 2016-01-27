@@ -1,0 +1,552 @@
+{
+    "type": "article",
+    "source": "Parse Trees",
+    "children": [
+        {
+            "type": "page",
+            "source": "About",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Review of derivation\n- Parse trees\n- Left-most and right-most derivation\n- Ambiguous grammars",
+                                    "uuid": "ca769672-3a7e-44da-8e39-79046ea0e1d9",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n..............\nThe importance of parsing to the interpretation of computer programs",
+                                    "uuid": "4155c509-783c-4fe6-bf90-2e254b3560dc",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "9907ae09-b564-48f6-8f35-e3df7f86b2ce",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "6a22ea03-e160-42d2-bbbc-cbf7e5d6241c",
+                    "version": 0
+                }
+            ],
+            "uuid": "c1f41449-4783-42fa-8bf5-4bc21bc80637",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "A brief review of CFG and derivations",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "CFG",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Grammar*:\n\n- Terminals\n  > Symbols in the actual strings\n- Non-terminals, disjoint from the terminals\n  > 1. Symbols used to represent intermediate languages.\n  > 1. Also called syntactic variables.\n- Start symbol (non-terminal)\n- A set of productions",
+                                    "uuid": "eb79a648-b5a5-4129-b40c-b61b5c0317b5",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "a6811d9b-3aa7-4a69-9d8b-34d2431bb58b",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Production:*\n\n- Head of production: a non-terminal\n- Body of production: zero or more symbols, either terminal or non-terminal.\n  Even the head of the production can appear in its own body.\n  \n  ",
+                                    "uuid": "7f7c77f8-96ae-4197-a755-b9726259c795",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "55bf7fa2-d93f-4406-bba3-e3cec21c11ce",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Alternations*:\n\n- If multiple productions have the same head, we can group them together\n  to a single production using alternations in the body.",
+                                    "uuid": "3fd55ceb-12c1-4ee0-95cf-9a6b4cff21de",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2d19e891-cb98-4764-9122-e70223599319",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "2c052682-7512-45aa-bb95-35c336645d5f",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n................\nDefining languages",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Derivation*:\n\n- Use production to rewrite strings.\n  > Replace the head of production with the body of the production.\n  \n",
+                                    "uuid": "2c62af16-0a3e-48ff-829b-2d73efe1fe76",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "1e60915c-1100-435d-8d3b-88eb64db2fc3",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "*Sentential forms and sentences*:\n\n- Sentential form:\n  > Any string that can be derived from the start symbol is a sentential form.\n\n- Sentences:\n  > If a sentential form consists of only terminals, then it's a sentence.\n  ",
+                                    "uuid": "77af9651-b402-4a86-959c-58c3299ee486",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "a6b6f65b-57b7-4d41-acbe-bb7b88095109",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 3 1\n................\n*Language of CFG*:",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "\nGiven a grammar $G$, the language $L(G)$ is all the sentences of $G$.",
+                                    "uuid": "2f34c8d2-71d7-430b-a5f8-3651e925e39b",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  color: blue\n...........\nA language that can be defined by a CFG is called a *context free language*.",
+                                    "uuid": "a1e2cf26-c4d2-4dda-bb79-da63e2b76789",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "9249a290-0a72-4de3-95d8-b2f063cfe770",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "50c6ea58-b5d0-4d10-a35b-54da92412893",
+                    "version": 0
+                }
+            ],
+            "uuid": "6aa5131b-a0e3-4e92-a69e-6a8393b69bf2",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Left-most and Right-most derivation",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math: 1",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "\nGiven a string $s$, we need to make a few decisions to derive a new string $s'$.\n\n1. Which production do we use?\n  > We need pick a production $p\\in G$ such that $\\mathrm{head}(p)$ appears\n  > in $s$.\n2. It's possible that $\\mathrm{head}(p)$ has multiple occurrences in $s$.\n   Which occurrence do we replace?\n   > We need to pick a specific occurrence of $\\mathrm{head}(p)$ to replace.\n   ",
+                                    "uuid": "09771568-a06e-4e5b-80dc-78f1d53f827b",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "6aa9f8eb-4c96-471f-ba35-9e3a96d3f51d",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> $s\\underset{p, i}{\\longrightarrow} s'$ means that we use production $p$ to replace the $i$-th symbol in $s$.",
+                                    "uuid": "48578d76-0beb-4898-b76c-a347f4f22b12",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "source": "*Example*:\n\n---",
+                                    "children": [
+                                        {
+                                            "type": "markdown",
+                                            "source": "\nLet $G$ be:\n\n- `$p_1$ = X : aX`\n- `$p_2$ = Y : b`\n\n$s$ = `XYX`\n\n",
+                                            "uuid": "23a8b5db-95c6-4b58-8937-fef33a8783c1",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "markdown",
+                                            "source": "We can have:\n\n1. $s\\underset{p_1, 1}{\\longrightarrow}$ <b>`aX`</b> `YX`\n\n2. $s\\underset{p_1, 3}{\\longrightarrow}$ `XY` <b>`aX`</b>\n\n3. $s\\underset{p_2, 3}{\\longrightarrow}$ `X` <b>`b`</b> `X`",
+                                            "uuid": "7cf2e1ff-6513-420b-8f49-008bbf7d7a6c",
+                                            "version": 0
+                                        }
+                                    ],
+                                    "uuid": "e8009d3f-f05e-4b43-949e-5573b4fab8f0",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "0d7d7ff6-0004-4c14-9632-b04fc886407c",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "a26c1a99-0443-4ca7-ae67-71700ffb3d8b",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n............\nLeft-most derivation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "For left-most derivation, we limit the choice we need to make during string rewriting using productions.\n\n1. Select a production $p$.\n1. *Always* select the first occurrence of $\\mathrm{head}(p)$ in $s$ to apply the production.",
+                                    "uuid": "5a16fcaf-ca09-4caf-a377-79c2ece995d5",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "8ed7a190-2d32-455f-b86b-ff8893c4c160",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "9da7e7d0-4010-4523-abcc-b071d56af671",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math: 1\n...........\nRight-most derivation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Always select the last occurrence of `$\\mathrm{head}(p)$` in $s$ to apply the production.",
+                                    "uuid": "eebaa181-8dbf-402a-b110-b917dc158544",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2377d112-b66c-4278-b06b-77efce4896f3",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "2c3e3a36-2a90-482d-986b-fd9c4208bfdb",
+                    "version": 0
+                }
+            ],
+            "uuid": "9e6b993d-9e1f-4935-8c85-b883e20e7b8a",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Parse Trees",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Definition",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Parse tree records the derivation steps as a single _tree_.\n- The nodes of the tree are symbols.\n- The intermediate nodes are non-terminals.\n- The leaf nodes are the terminals.\n- The root node is the start symbol.",
+                                    "uuid": "d1a05f43-ebb2-49c3-9f80-0d2da3b04b1d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7289d20e-bb78-480f-af5a-5d537a561338",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: center\n................\n<iframe src=\"https://docs.google.com/presentation/d/1u3DQYQYHKTeGUBSdpb0cI2sv2Fr-MCqTCy4riG62av4/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"576\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "e6c2b08c-4852-4e68-b21d-d71993cc81ef",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "b5a5d796-db4c-4573-91af-18d7faef0390",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "c3364e45-f938-4720-aac7-e1d3ae4e6356",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Example of a practical context free language",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 3",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "We will present a grammar of the language of all arithmetic expressions over integers.",
+                                    "uuid": "9c21bd83-3237-42c8-b6ea-97635d382517",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "source": "w: 0 0 0",
+                                    "children": [
+                                        {
+                                            "type": "markdown",
+                                            "source": "~~~\nE : Num\n  | E + E\n  | E - E\n  | E * E\n  | E / E\n  | ( E )\n~~~",
+                                            "uuid": "ec0e0788-10a3-4cc7-9cc1-cbbb2632cfb2",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "markdown",
+                                            "source": "~~~\nDigit : 0 | 1 \n      | 2 | 3 \n      | 4 | 5 \n      | 6 | 7 \n      | 8 | 9\n~~~",
+                                            "uuid": "4e88b37a-8fdb-4b18-8ce8-c693c015e6ca",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "markdown",
+                                            "source": "~~~\nNum : Digit\n    | Digit Num\n~~~",
+                                            "uuid": "a878ef48-4f21-4262-8484-b56e1ca87632",
+                                            "version": 0
+                                        }
+                                    ],
+                                    "uuid": "f5cabda5-a6fd-466e-ae8e-2b5df8b559f8",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "efbe221f-8fd2-4be7-b681-8bea0aeca352",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "b6b7afd1-3670-464f-a527-2537f0b244ec",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "........................\nParse tree: interpretation of computer programs",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "1. A computer programming language is specified by its CFG.\n1. A (valid) computer program is a sentence of the CFG that expresses the intention of the programmer.\n2. With respect to the grammar, the parser will construct a parse tree.\n1. According to the parse tree, the computer will interpret the program.",
+                                    "uuid": "df639212-cad9-4114-ac69-e48b8f2b5d6c",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "f696fd6c-0023-40ac-8166-887200967827",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 0",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Challenge:\n>  Can you construct a parse tree for each of the following?\n> - `1 + (2 * 3)`\n> - `1`\n> - `12`\n> - `1 + 2 * 3`\n> - `-10`",
+                                    "uuid": "256874d9-52ca-4a80-a44e-c94c45b0439e",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "source": "w: 0 0 0",
+                                    "children": [
+                                        {
+                                            "type": "markdown",
+                                            "source": "~~~\nE : Num\n  | E + E\n  | E - E\n  | E * E\n  | E / E\n  | ( E )\n~~~",
+                                            "uuid": "8bcb41fe-911e-4dc9-9c86-c08bbe4f8e07",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "markdown",
+                                            "source": "~~~\nDigit : 0 | 1 \n      | 2 | 3 \n      | 4 | 5 \n      | 6 | 7 \n      | 8 | 9\n~~~",
+                                            "uuid": "2e791b74-0961-465d-a6ca-fff0262a5bad",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "markdown",
+                                            "source": "~~~\nNum : Digit\n    | Digit Num\n~~~",
+                                            "uuid": "6acc909c-4fec-47c1-b6ab-9e6dc1aafa84",
+                                            "version": 0
+                                        }
+                                    ],
+                                    "uuid": "8c7bdebf-2c4c-4a86-9f0a-ab9ae63c4aea",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "30dd539d-c118-4303-b4c0-95dd44de9c3e",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "d5c6ceca-9f54-4d4b-bc6b-dca8855610e3",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Interpretation of program",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Leaf nodes can be immediately evaluated to values.\n- Each production represents some computation.\n- This allows bottom-up evaluation of the entire parse tree.\n- The root node is evaluated to a value.  This is the final result of the entire program.",
+                                    "uuid": "aa5097b2-26ca-4bd8-9910-2fa4ffe3a02f",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "fff6dfa8-ad06-4aa1-9f9b-f36c56907013",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "source": "",
+                                    "children": [
+                                        {
+                                            "type": "markdown",
+                                            "source": "*Example:*\n\nConsider the follow grammar, and \na _program_: \n\n`1 + 2 + 3`",
+                                            "uuid": "e13d1d26-c6e5-4fcb-99b7-ea575d99c94d",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "box",
+                                            "layout": "horizontal",
+                                            "source": "w: 0 0 0",
+                                            "children": [
+                                                {
+                                                    "type": "markdown",
+                                                    "source": "~~~\nE : Num\n  | E + E\n  | E - E\n  | E * E\n  | E / E\n  | ( E )\n~~~",
+                                                    "uuid": "1c518b4c-53d4-47d8-bd7c-fb683496f6b8",
+                                                    "version": 0
+                                                },
+                                                {
+                                                    "type": "markdown",
+                                                    "source": "~~~\nDigit : 0 | 1 \n      | 2 | 3 \n      | 4 | 5 \n      | 6 | 7 \n      | 8 | 9\n~~~",
+                                                    "uuid": "56a0a13d-1bdf-4133-b66a-afa5bf34e957",
+                                                    "version": 0
+                                                },
+                                                {
+                                                    "type": "markdown",
+                                                    "source": "~~~\nNum : Digit\n    | Digit Num\n~~~",
+                                                    "uuid": "abe402db-8853-4afe-b6aa-32a66a6b7724",
+                                                    "version": 0
+                                                }
+                                            ],
+                                            "uuid": "6f0a6d1d-d675-4ca5-a5d1-e10f6cdf9bbb",
+                                            "version": 0
+                                        }
+                                    ],
+                                    "uuid": "7de7b23e-8c8b-45bc-bea4-29e5fa0f7854",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/1onV-nPBtl2ISEmPHg8rW2q4Fn6FXiBYRs8PapqBZPlA/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "bd0e585e-f470-4843-8619-03578ab3e1f4",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "908315a5-72d6-48ba-a64c-1312ce0f9c97",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "e625ae4b-ce05-4a7f-ade2-ca143c7e4b1d",
+                    "version": 0
+                }
+            ],
+            "uuid": "3d69e760-c2d2-4c64-a0f6-f75c85f943db",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Summary",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> \n  - Context free grammars can define languages.\n  - Derivation rewrites the start symbol to sentential forms of the grammar using its production rules.\n  - Derivation can be left-most or right-most.\n  - Derivations can be recorded as a parse tree.\n  - Parse trees are how a program is interpreted by the computer.",
+                                    "uuid": "d397094d-26e6-4fb8-b3f1-09b7cc599ed0",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "1f03b542-8ac7-408d-bd01-f6a918ebd783",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "5d808ae6-ad67-4713-847f-21d0c9e59c40",
+                    "version": 0
+                }
+            ],
+            "uuid": "95711f3e-99e2-4059-9dcb-219f448d9ee0",
+            "version": 0
+        }
+    ],
+    "uuid": "a2afc251-5122-4c57-96dd-f3aace25cf2b",
+    "modified": true,
+    "version": 3,
+    "history": 6
+}
