@@ -149,9 +149,9 @@
                             "children": [
                                 {
                                     "type": "markdown",
-                                    "source": "Consider the sentence of the form:\n\n`if $E_1$ then $S_1$ else if $E_2$ then $S_2$ then $S_2$ else $S_3$`",
+                                    "source": "Consider the sentence of the form:\n\n`if $E_1$ then $S_1$ else if $E_2$ then $S_2$ else $S_3$`",
                                     "uuid": "30312544-45b9-4020-83b7-de33477a60a9",
-                                    "version": 0
+                                    "version": 3
                                 },
                                 {
                                     "type": "image",
@@ -162,7 +162,7 @@
                                 }
                             ],
                             "uuid": "bdee0d1a-5df0-4da2-94a7-9a56c14564a4",
-                            "version": 0
+                            "version": 3
                         },
                         {
                             "type": "box",
@@ -225,18 +225,11 @@
                         }
                     ],
                     "uuid": "d997aac9-4c5a-45b1-a82b-937381937001",
-                    "version": 0
+                    "version": 3
                 }
             ],
             "uuid": "ab60eb2f-74e5-4120-bb5d-aecf6b0a3751",
-            "version": 0
-        },
-        {
-            "type": "page",
-            "source": "",
-            "children": [],
-            "uuid": "c199c6e6-6710-4fcf-8474-9b019ec2af18",
-            "version": 0
+            "version": 3
         },
         {
             "type": "page",
@@ -416,7 +409,7 @@
                 }
             ],
             "uuid": "7b5a971f-05cc-42a3-aba4-82b0098de7bf",
-            "version": 0
+            "version": 4
         },
         {
             "type": "page",
@@ -452,6 +445,6 @@
     ],
     "uuid": "360e25d5-fef6-4999-b830-c1270778ad68",
     "modified": true,
-    "version": 12,
-    "history": 6
+    "version": 8,
+    "history": 2
 }
