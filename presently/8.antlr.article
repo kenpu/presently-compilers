@@ -269,7 +269,7 @@
                             "children": [
                                 {
                                     "type": "code",
-                                    "source": "\n$ java org.antlr.v4.gui.TestRig Hello -tokens\nHello world from antlr.\n<CTRL-D>\n[@0,0:4='Hello',<2>,1:0]\n[@1,6:10='world',<3>,1:6]\n[@2,12:15='from',<3>,1:12]\n[@3,17:21='antlr',<3>,1:17]\n[@4,22:22='.',<1>,1:22]\n[@5,24:23='<EOF>',<-1>,2:0]\n",
+                                    "source": "\n$ java org.antlr.v4.gui.TestRig Hello start -tokens\nHello world from antlr.\n<CTRL-D>\n[@0,0:4='Hello',<2>,1:0]\n[@1,6:10='world',<3>,1:6]\n[@2,12:15='from',<3>,1:12]\n[@3,17:21='antlr',<3>,1:17]\n[@4,22:22='.',<1>,1:22]\n[@5,24:23='<EOF>',<-1>,2:0]\n",
                                     "uuid": "d6c4dd6a-4242-47a1-8f92-d8f0a2cc6e67",
                                     "version": 0
                                 },
@@ -290,9 +290,9 @@
                             "children": [
                                 {
                                     "type": "code",
-                                    "source": "\n$ java org.antlr.v4.gui.TestRig Hello -gui\nHello world from antlr.\n<CTRL-D>\n",
+                                    "source": "\n$ java org.antlr.v4.gui.TestRig Hello start -gui\nHello world from antlr.\n<CTRL-D>\n",
                                     "uuid": "75d57110-0694-4722-b152-0d9ca281d7fa",
-                                    "version": 0
+                                    "version": 7
                                 },
                                 {
                                     "type": "image",
@@ -303,15 +303,15 @@
                                 }
                             ],
                             "uuid": "0c0b1c02-7d8d-4b2b-a683-d77ed4dc5b76",
-                            "version": 0
+                            "version": 7
                         }
                     ],
                     "uuid": "ac7c1509-3265-4db5-8862-4f932fd290c2",
-                    "version": 0
+                    "version": 7
                 }
             ],
             "uuid": "5ccc1cf5-7bc2-4b32-98ee-8a41571c1e60",
-            "version": 0
+            "version": 7
         },
         {
             "type": "page",
@@ -476,6 +476,6 @@
     ],
     "uuid": "68fa2521-d5f7-45f3-a12b-33646a2c142a",
     "modified": true,
-    "version": 5,
+    "version": 7,
     "history": 6
 }

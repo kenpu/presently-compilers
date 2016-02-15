@@ -1,0 +1,89 @@
+{
+    "type": "article",
+    "source": "Reading Assignments",
+    "children": [
+        {
+            "type": "page",
+            "source": "",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n................\nSection 4.1.1, 4.1.2",
+                                    "uuid": "ca62cedb-935e-4b6e-a94a-88dbd374efba",
+                                    "version": -1
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Lexical analysis",
+                                    "uuid": "691e886b-a6e7-4a5f-8a1d-0a4e1a30c50f",
+                                    "version": -1
+                                }
+                            ],
+                            "uuid": "4a91a4c2-d47f-4031-b259-57676cc85842",
+                            "version": -1
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n..............\n- Section 4.2\n\n",
+                                    "uuid": "15b09192-6497-4cf2-b461-82f7641577ed",
+                                    "version": -1
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Authoring context free grammar",
+                                    "uuid": "0797ec82-6759-4619-bdc3-f338ff233733",
+                                    "version": -1
+                                }
+                            ],
+                            "uuid": "b22f858b-0494-4bc5-a1cd-8cb1edd6d8f6",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n..............\n- Section 4.3.1, 4.3.2\n\n",
+                                    "uuid": "ccb3b53a-f925-4c4b-9f61-0c7779dbf1ce",
+                                    "version": 4
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Ambiguity & removing ambiguity",
+                                    "uuid": "48680a31-ca1c-4fa0-804f-04168c466eb1",
+                                    "version": 35
+                                }
+                            ],
+                            "uuid": "62294459-ce04-4d4f-b8f8-09d1838e1d2c",
+                            "version": 40
+                        }
+                    ],
+                    "uuid": "7d395567-bf70-42ef-9db8-4f6a028743e1",
+                    "version": 41
+                }
+            ],
+            "uuid": "5a3e56ae-b6f9-431d-acb3-6633ef675aa0",
+            "version": 41
+        }
+    ],
+    "uuid": "37ba6c27-ac28-40f3-85f3-552f0563fe96",
+    "modified": true,
+    "version": 41,
+    "history": 4
+}

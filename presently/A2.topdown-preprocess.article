@@ -1,0 +1,192 @@
+{
+    "type": "article",
+    "source": "draft:\n..................\nPreprocessing For Top-down Parsing",
+    "children": [
+        {
+            "type": "page",
+            "source": "Left recursion",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Review",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 0 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\nglobal inputStream\nvoid X(node) {\n    a = firstToken(inputStream)\n    p = select(X, a)\n    let $A:X_1 X_2 \\dots X_k$ = p\n    for i = 1 .. k {\n      appendChild(node, new Node($X_i$))\n      if $X_i \\in \\Sigma_\\mathrm{nonterminal}$:\n          $X_i$()\n      else if $X_i$ == a:\n          inputStream.removeFirst()\n      else:\n          ERROR\n  }\n}\n~~~",
+                                    "uuid": "f082c991-dbf8-4fb2-8a69-baf4d4841ea5",
+                                    "version": 3
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "We start parsing by `startSymbol()`.\n\n> How do we know if it will ever terminate?\n\nInfinite loop occurs when:\n\n> `A()` calls `A()` again with the _same_ global state (of the token stream).",
+                                    "uuid": "9336bdbe-210d-486a-bd7f-e26d8dc15031",
+                                    "version": 253
+                                }
+                            ],
+                            "uuid": "4eb6d841-8c02-4b55-8a13-b7ecfce9d3dd",
+                            "version": 264
+                        }
+                    ],
+                    "uuid": "be3c1837-c59a-4e86-a6a4-d043f6656475",
+                    "version": 272
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n..............\nLeft recursive grammar",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- A grammar $G$ is _left recursive_ if there exists a symbol $X$ such that it can derive $X\\Rightarrow^* Xs$ for some string $s$.\n\n- A grammar $G$ is _immediate left recursive_ if there exists a production of the form: $X: Xs$ for some string $s$.",
+                                    "uuid": "1387af47-ef8d-485b-898c-19e57829a4a2",
+                                    "version": 274
+                                }
+                            ],
+                            "uuid": "3a1d55bf-a034-4861-a943-8826848c7041",
+                            "version": 276
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "An immediate left recursive grammar:\n\n```\nE : E + E\n  | E - E\n  | NUM\n```",
+                                    "uuid": "58091f72-769e-4c30-bff4-df75a8039f5e",
+                                    "version": 96
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "A left recursive grammar that is *not* immediate left recursive:\n\n```\nA : B\nB : Aa\n```",
+                                    "uuid": "c987eeae-f6bc-48e6-96bf-229be7c2c143",
+                                    "version": 93
+                                }
+                            ],
+                            "uuid": "15bda577-c3dd-4a66-8cfd-6ff834a61c79",
+                            "version": 190
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> *Theorem*:\n>\n> If a grammar $G$ is left recursive, then it is that top-down parsing will *not* terminate for some sentence in the language of $G$.",
+                                    "uuid": "caf96501-2a78-47ae-b429-abb273d7697e",
+                                    "version": 247
+                                }
+                            ],
+                            "uuid": "a9b1892f-dab4-4838-8048-27cffce8c50e",
+                            "version": 247
+                        }
+                    ],
+                    "uuid": "466ad964-a5f4-4e0d-8938-b264af2a55d2",
+                    "version": 762
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n................\nGrammar transformation - removing left recursion",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: narrow right\n..............\nSuppose that $A$ is immediate left recursive.  We assume that there is only _one_ production of the form $A:As$.\n\nIf there is more than one, we need to perform _left factoring_.",
+                                    "uuid": "7e2da9de-79d6-4558-af42-1d63d0c8b746",
+                                    "version": 322
+                                }
+                            ],
+                            "uuid": "9a07daa0-4096-4a1a-8985-18aab966cd3a",
+                            "version": 325
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "# Removing immediate left recursion",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Let's consider the general form of immediate left recursion.\n\n> `$A \\to As | t_1 | t_2 | \\dots | t_n$`",
+                                    "uuid": "8a881795-c226-4847-bcbf-330575d7e0a4",
+                                    "version": 203
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "What is the language of $L(A)$?\n\n> $L(A) = \\big(\\bigcup_i L(t_i)\\big) L(s)^*$\n>\n> _Challenge_: convince yourself that it's true with a formal proof.",
+                                    "uuid": "4063959e-8f7a-49ee-8fa2-429a79b38de6",
+                                    "version": 257
+                                }
+                            ],
+                            "uuid": "e57f8c83-528e-41a5-b844-34ddefdc3b3c",
+                            "version": 513
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Immediate left recursion:\n> `$A \\to As | t_1 | t_2 | \\dots | t_n$`\n\nIts lanugage:\n> $L(A) = \\big(\\bigcup_i L(t_i)\\big)\\cdot L(s)^*$\n>\n> Let rewrite it:\n>\n> $L(A) = \\bigcup_i \\big(L(t_i) \\cdot L(s)^*\\big)$",
+                                    "uuid": "053930a5-4b6b-450d-b0a7-bf0792adcb8a",
+                                    "version": 330
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Another equivalent grammar:\n> <pre>\n$A'$ : $\\epsilon$ | $sA'$\n$A$ : $t_1 A'$\n   | $t_2 A'$\n   ...\n   | $t_n A'$\n  </pre>",
+                                    "uuid": "0e41c505-8c42-4467-a40a-38b883f4deb2",
+                                    "version": 11
+                                }
+                            ],
+                            "uuid": "4125b9b0-c71d-4d93-854f-3e21a64c01e8",
+                            "version": 345
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 0 1\n# Removing general left recursion",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\narrange the nonterminals in some order $A_1$, $A_2$, ... $A_n$\n\nfor i in 1 to n {\n    for j in 1 to (i-1) {\n        look for ($A_i \\to A_j\\gamma$) \n        if found {\n            // oops, the invariance condition is violated\n            $A_j$ must have productions: $A_j: \\delta_1 | \\delta_2 | \\dots | \\delta_n$\n            replace $A_i\\to A_j\\gamma$ with $A_i: \\delta_1\\gamma | \\delta_2\\gamma | \\dots | \\delta_n\\gamma$\n        }\n    }\n    eliminate the immediate left recursions of $A_i$-productions.\n}\n~~~\n",
+                                    "uuid": "98f5dd70-9e1d-4024-bef8-31fbefc6817a",
+                                    "version": 87
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "We want to maintain a constraint on the production of the final grammar:\n\n> *Invariance condition*:\n> ***\n> $A_i : A_j s$ must be such that $j > i$.",
+                                    "uuid": "76925ff7-7a07-4bb5-ae04-beb304c7ae52",
+                                    "version": 207
+                                }
+                            ],
+                            "uuid": "11eb8f09-1458-461f-b8d9-f5bbc300a3b0",
+                            "version": 342
+                        }
+                    ],
+                    "uuid": "72d84201-45b9-4c05-b197-c29bc1071e57",
+                    "version": 1613
+                }
+            ],
+            "uuid": "66e410e9-8b63-4174-af71-30d68726be6f",
+            "version": 2666
+        }
+    ],
+    "uuid": "2e3a61ae-7968-4e9e-a1e8-2044ecf8836b",
+    "modified": true,
+    "version": 2791,
+    "history": 6
+}
