@@ -1,6 +1,6 @@
 {
     "type": "article",
-    "source": "Top down parsing: a first look",
+    "source": ".................\nTop down parsing: a first look",
     "children": [
         {
             "type": "page",
@@ -48,19 +48,19 @@
                                     "type": "markdown",
                                     "source": "We will be designing an (imperfect) parsing algorithm known as the _top-down parsing_.\n\nIt has the following properties:\n\n- Builds the parse tree from the root, and expand the nodes from downwards to the leaf level.\n\n- Builds parse trees for the _left-most_ derivations.\n\n- Only works for LL(1) grammars.  (Can be generalized to LL(k) grammars)\n\n- Runs in linear-time.",
                                     "uuid": "40e8efdc-6320-42c2-81b3-925927a82035",
-                                    "version": 8
+                                    "version": 0
                                 }
                             ],
                             "uuid": "d02638fa-f889-45fb-9fb6-29ddd328878b",
-                            "version": 8
+                            "version": 0
                         }
                     ],
                     "uuid": "9d410255-6e8a-4b8d-9252-5bbc9293199d",
-                    "version": 10
+                    "version": 0
                 }
             ],
             "uuid": "22d84d34-209a-4d4d-adc4-37e32e7a99d3",
-            "version": 10
+            "version": 0
         },
         {
             "type": "page",
@@ -85,11 +85,11 @@
                                     "type": "markdown",
                                     "source": "<iframe src=\"https://docs.google.com/presentation/d/1Te00IGjFpAhPrXe3bjn0bFfeWI97sfIrwpOuhDXMyjU/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"576\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
                                     "uuid": "8a70fe79-edec-4464-b42e-19ad7e80ce3a",
-                                    "version": 4
+                                    "version": 0
                                 }
                             ],
                             "uuid": "07e725a6-9cee-4ab6-b1b3-da377e1fc8b1",
-                            "version": 5
+                            "version": 0
                         },
                         {
                             "type": "box",
@@ -100,21 +100,21 @@
                                     "type": "markdown",
                                     "source": "The assumption:\n\n> By examining the next unconsumed token and the symbol we are trying to expand, we can always uniquely determine the production to be used.\n\n`$$\\mathrm{select}:\\Sigma_\\mathrm{nonterminal}\\times\\Sigma_\\mathrm{terminal}\n\\to \\mathrm{Production}$$`",
                                     "uuid": "fb99c778-5289-4857-9d1b-d3974f5a720c",
-                                    "version": 311
+                                    "version": 0
                                 },
                                 {
                                     "type": "markdown",
                                     "source": "css:\n  color: blue\n...............\nThe assumption is *only* valid for some very specific types of grammars.",
                                     "uuid": "284ede01-b734-4aa9-b9ec-75536cbd2c4e",
-                                    "version": 119
+                                    "version": 0
                                 }
                             ],
                             "uuid": "218c84a9-3f63-4b82-8ed5-8f5c67f1fd6c",
-                            "version": 438
+                            "version": 0
                         }
                     ],
                     "uuid": "318441ea-80a6-4f21-80ec-48a5d21d86ba",
-                    "version": 486
+                    "version": 0
                 },
                 {
                     "type": "section",
@@ -129,11 +129,11 @@
                                     "type": "markdown",
                                     "source": "The initial (global) state:\n>- **Tree**: We start with the parse tree with only the root node which is labeled by the start symbol.\n- **Token stream**: The token stream contains the entire input.",
                                     "uuid": "b571d45f-4c1b-4cd3-a106-822579306bfe",
-                                    "version": 309
+                                    "version": 0
                                 }
                             ],
                             "uuid": "4d72ae2a-c3db-4b9d-90a6-3852de6be981",
-                            "version": 312
+                            "version": 0
                         },
                         {
                             "type": "box",
@@ -144,11 +144,11 @@
                                     "type": "markdown",
                                     "source": "Subsequent parsing:\n\n> Let `X` be a non-terminal symbol.  We assume that there is a _tree expanding_ function `X(node)` which expands a node labeled by `X` based on the current state of the token stream.",
                                     "uuid": "8dd2aefb-7102-45d7-a2ca-b0efb1c2f704",
-                                    "version": 305
+                                    "version": 0
                                 }
                             ],
                             "uuid": "27e0ae01-2d92-47d1-9472-58624d6ad98e",
-                            "version": 306
+                            "version": 0
                         },
                         {
                             "type": "box",
@@ -159,21 +159,21 @@
                                     "type": "markdown",
                                     "source": "~~~\nglobal inputStream\nvoid X(node) {\n    a = firstToken(inputStream)\n    p = select(X, a)\n    let $A:X_1 X_2 \\dots X_k$ = p\n    for i = 1 .. k {\n      appendChild(node, new Node($X_i$))\n      if $X_i \\in \\Sigma_\\mathrm{nonterminal}$:\n          $X_i$()\n      else if $X_i$ == a:\n          inputStream.removeFirst()\n      else:\n          ERROR\n  }\n}\n~~~",
                                     "uuid": "a522b316-ece3-4a12-bee4-a718b452ae6d",
-                                    "version": 513
+                                    "version": 0
                                 },
                                 {
                                     "type": "markdown",
                                     "source": "- Recursively expand nodes from the root.\n- Consume terminals when possible.\n- When not possible, we raise an error.\n\n---\n\nError can be of many things:\n\n1. The input does not belong to the language of the grammar.\n2. The parsing algorith cannot properly handle the grammar.\n\n> <note/> Fact:\n>> If the grammar is LL(1), then the top-down recursive parser can properly produce the parse tree whenever the string belongs to the language.",
                                     "uuid": "e6d22038-617a-4532-8891-58a20985b392",
-                                    "version": 553
+                                    "version": 0
                                 }
                             ],
                             "uuid": "6042e4cd-2bcd-4563-af94-d3b0db53c8eb",
-                            "version": 1074
+                            "version": 0
                         }
                     ],
                     "uuid": "8e1551c1-22d0-4f5e-8317-bc7e44eb1bdc",
-                    "version": 1758
+                    "version": 0
                 },
                 {
                     "type": "section",
@@ -188,23 +188,23 @@
                                     "type": "markdown",
                                     "source": "- How do we design `select(symbol, token)`?\n- What is a **LL(1)** grammar?\n- A few other wrinkles to take care of...",
                                     "uuid": "8e6b1e1c-5e4d-484e-8ee1-908f2bb1ac0b",
-                                    "version": 141
+                                    "version": 0
                                 }
                             ],
                             "uuid": "40b1f23b-d912-4294-80b0-41f6a964b7d0",
-                            "version": 141
+                            "version": 0
                         }
                     ],
                     "uuid": "c06281a3-1838-4d50-bc8c-8b4a4c72fdd7",
-                    "version": 197
+                    "version": 0
                 }
             ],
             "uuid": "37c8cf37-b77c-4d58-a726-09c270a2365f",
-            "version": 2443
+            "version": 0
         }
     ],
     "uuid": "65a3e0f8-82fe-490d-8b93-e13aa4c68078",
     "modified": true,
-    "version": 2457,
+    "version": 19,
     "history": 6
 }
