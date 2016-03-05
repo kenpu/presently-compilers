@@ -1,0 +1,286 @@
+{
+    "type": "article",
+    "source": "\nSyntax Directed Defintions",
+    "children": [
+        {
+            "type": "page",
+            "source": "About",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Parse tree revisited\n- Semantic rules and SDD\n- Termination of SDD",
+                                    "uuid": "5ae97570-176a-4eff-9c4e-02cfd50b46e1",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "10861f9f-9cb3-4df1-8b7b-4f669306345f",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "f033ee31-c49f-4bda-ada9-4a83cb666318",
+                    "version": 0
+                }
+            ],
+            "uuid": "72de7420-8b78-41e9-95ca-d753f8090a05",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Programming with trees",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Syntax tree",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Syntax tree:\n\n> - Nodes are syntactic variables (nonterminal symbols).\n> - Leaves are the tokens (terminal symbols)",
+                                    "uuid": "6037ee3b-f2ca-436a-90b7-ce4e498b2440",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Annotated Syntax Tree\n\n> - Nodes can store _data_.\n> - Data can be:\n>   1. value (for interpreter)\n>   2. fragments of code (for compiler)",
+                                    "uuid": "ee097bba-b8ff-4b8a-936e-d29a2f545231",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "a2ebfb4a-b6b4-45dd-8c9a-b05e2657ddee",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: center\n.................\n<iframe src=\"https://docs.google.com/presentation/d/18MR27tfpiybQctOsP8hhtUTVVrR0bwABIO9pPqCWMVI/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"960\" height=\"569\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "93022b60-16c6-4c17-81d4-0d3216d91bf9",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "8f9866d9-5c0c-4a06-ba8a-4519416c7e2e",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "eb04225d-7a84-4c54-ae41-99206f81e488",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Formalizing annotation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Nodes have _attributes_.  Each attribute can hold _data_ or _code fragment_ as its _value_.\n- Attribute values can be initialized:\n  > - Token values are initialized to be the lexeme.\n  > - For certain attributes, the root node is initialized.\n- Attribute values can be _derived_.\n  > - Interior nodes in a parse tree hold derived values.",
+                                    "uuid": "ac5c857b-d5c6-40b3-a4ac-fc465348f82d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "22640b27-90fc-42a3-a314-16ca906d11f1",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "eef7f853-a3a5-4ba9-a91b-6d8aff668205",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math :\n...........\nSemantic Rules: A new programming paradigm",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/>\n> Semantic rules describe the derivations of attributes in the parse tree.",
+                                    "uuid": "9ae8deb1-7994-4af9-bfd3-a1f5f8b7a435",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "419734d1-ac01-4714-97e6-b4763522bf3e",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Each production can have one or more semantic rules.\n- To define a semantic rule for a production: `E : E + E`, we have :\n  1. Ensure that *every* symbol is uniquely identifiable.\n     > In the production `E: E + E`, there are three `E`.  We have to distinguish them by indexing as `E: E1 + E2`.\n  2. The semantic rule describes the derivation of some attribute.\n     > ~~~\n     E : E1 + E2           E[val] = E1[val] + E2[val]\n       | E1 * E2           E[val] = E1[val] * E2[val]\n       | ( E1 )            E[val] = E1[val]\n       | num               E[val] = parseInt(num[lexeme])\n     ~~~",
+                                    "uuid": "54258c9f-13b1-400d-91a7-ac43b521fb6d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "02a39e03-34cf-4ffb-b4f6-d165c85e2400",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "In general, given a production `X: Y1 Y2 ... Yk`,\nits semantic rule can be of several forms:\n\n> - `$X[a] = f(Y_1[a], Y_2[a], ..., Y_k[a])$` (S-attribute)\n> - `$Y_j[a] = f(X[a], Y_1[a], ...)$` (general attribute)",
+                                    "uuid": "9e0f2bcb-c101-48e6-a7cd-f384498af8de",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "e8023e13-d0e2-4e1f-9e42-780f6c883c5f",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> *Definition*:\n> Computing annotations of a parse tree using semantic rules on one or more attributes is called *Syntax Directed Definition* (SDD).",
+                                    "uuid": "530db86b-23f0-4a4c-992f-329895ca59b9",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2c47a50b-2203-4cb2-9e72-7352382a230f",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "879599b0-937c-41d3-bd22-f91ff2554406",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math :\n.............\nAn algorithm for evaluating attributes",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 0 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\nwhile true:\n  change = false\n  for each $p \\in $ Productions($G$):\n  |  for each semantic rule of $p$:\n  |  |  Evaluate semantic rule of $p$: $X[a] = f(\\dots)$.\n  |  |  If $X[a]$ changed:\n  |  |  |   change = true\n  if change == false:\n    break\n~~~",
+                                    "uuid": "58b5100a-9f11-4a5f-a5fb-f29e97012b06",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  color: blue\n.....................\nKeep evaluating the semantic rules until the tree stops changing any of the attributes that are being derived.",
+                                    "uuid": "1edba3bb-0539-4df2-ab65-037e084da487",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "28602ec6-0258-456e-8154-33d9e950d7cd",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n.................\nWarning infinite loops...",
+                                    "uuid": "595173e1-adb3-4825-b727-2b796827587b",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/1cWRywXXYXvCY4snozrGO9og_XjlSAAN8oH0Q_35n_1o/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "2a39ac20-40b7-43f3-b7df-c6c577f05874",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "58bd4245-965a-4903-a3e8-4dbe6220196d",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "64edd553-c429-420d-96e8-ccdb1d9f57ab",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math :\n.................\nSemantic rules with termination guarantee",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- S-attributes:\n  > - `X[a] = f(Y1[a], Y2[a], ...)`\n  > - Each `Yi` must be a child of `X`.\n  > - `X[a]` is _synthesized_ from the attributes of its children.\n  \n- L-attributes:\n  > - `$Y_j[b] = f(Y_1[b], Y_2[b], \\dots, Y_{j-1}[b]$`\n  > - $Y_j$ is determined by _left_ its siblings.\n  \n- Inherited attributes\n  > - `$Y_j[c] = f(X[c])$`\n  > - `$Y_j$` is a child of `$X$`.",
+                                    "uuid": "d48b368b-b2d3-465f-80cb-1591e9f7388b",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "> <note/> *Theorem*: \n> - If only S-attributes are used, then the SDD terminates. \n> - If only L-attributes are used, then the SDD terminates",
+                                    "uuid": "a0558786-c625-46dc-b1db-f9cdb02c7cda",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "b9450f08-5c77-4f6c-b511-e57565d9ad23",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "6f1750a8-fbd9-4795-b469-ca8e2420777f",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Example",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": " ~~~\n E : E1 + E2           E[val] = E1[val] + E2[val]\n   | E1 * E2           E[val] = E1[val] * E2[val]\n   | ( E1 )            E[val] = E1[val]\n   | num               E[val] = parseInt(num[lexeme])\n ~~~\n This is a S-attributed SDD.",
+                                    "uuid": "ec4cff54-4038-43f7-a16e-3819d167a1f9",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7f2fcdd9-8f42-49fa-8e55-5500db730426",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "8863d709-0fde-4f10-936b-49d73779f5af",
+                    "version": 0
+                }
+            ],
+            "uuid": "32ef9250-666f-40c0-8d31-37573d51905f",
+            "version": 0
+        }
+    ],
+    "uuid": "0c8b520d-baab-4466-bc80-434258ac9485",
+    "modified": true,
+    "version": 4,
+    "history": 6
+}

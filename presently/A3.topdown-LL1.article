@@ -1,0 +1,524 @@
+{
+    "type": "article",
+    "source": "First, Follow Sets & LL(1)",
+    "children": [
+        {
+            "type": "page",
+            "source": "About",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math:\n",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "source": "In this section, we will complete the top-down parsing algorithm.",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "First sets:\n\n> - Sets of terminals\n> - Defined on arbitrary strings of terminals & nonterminals\n\n`$$\\mathrm{First}:\\Sigma^*\\to\\mathrm{SET}(\\Sigma_\\mathrm{terminal})$$`",
+                                    "uuid": "b886f00a-5f78-478a-aeff-d6befe15c89d",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Follow sets:\n\n> - Sets of terminals\n> - Defined on non-terminals.\n\n`$$\\mathrm{Follow}:\\Sigma_\\mathrm{nonterminal} \\to\\mathrm{SET}(\\Sigma_\\mathrm{terminal})$$`",
+                                    "uuid": "f01c683c-0dc6-4005-aa08-66c3449db2dc",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "LL(1)\n\n> A property of the grammar defined based on the First- and Follow-sets.",
+                                    "uuid": "52562379-344c-41b0-96b8-a476a434964c",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "e80ac5fc-55c3-499a-8c7c-f7170a40e5f6",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Constructive algorithms for:\n\n1. Compute the FIRST and FOLLOW sets.\n2. Compute the predicative parse table.\n3. Complete the top-down recursive descendent parser.",
+                                    "uuid": "0fa90fbd-8c37-473b-aadd-40c111eedf7a",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "234c0259-7c18-41ea-be80-be5989785d06",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "64819aad-e0f1-49fe-8835-9fdee3b3eb78",
+                    "version": 0
+                }
+            ],
+            "uuid": "2b98b84a-c6dc-42f5-8d00-02eeb612205c",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "FIRST sets",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math:\n.................\nMotivation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 3 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Recall that the top-down parser has a _magical_ function: `select`.\n\n`select: Nonterminal $\\times$ Terminal $\\to$ Production`",
+                                    "uuid": "5f3ece71-d203-45f1-aeca-88ddc8d8ce4d",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  color: blue\n.............\nCan we think of a few different scenarios where `select` is possible?",
+                                    "uuid": "f39152fd-0b13-41af-9f56-a6210f1bb5d5",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "bca034b0-ca27-45f1-b783-5fca7825cc47",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Greedily selection\n- Pick a production that can consume the first unconsumed token in the input stream.",
+                                    "uuid": "8e5d5381-c8a6-4aca-81b0-becaf98376fe",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/12PxYvwqxbwEcFprqTVf-rCTqb4kWv2OUZNSGQ9GTO98/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "c3aa3c00-cd3f-469c-a78d-98a4d0f7866f",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "89116bf1-f85b-4694-b5f0-da853bbf1e32",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "580d6038-7666-4fa0-983e-40dc296f6850",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n..............\nFirst set - the definition",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "\nWe first define a slightly limited version of FIRST set.\n\n`$$\\mathrm{First}_0 : \\Sigma^* \\to\\mathrm{Set}(\\Sigma_\\mathrm{terminal})$$`\n\n> <note/>\n> Given an arbitrary string $s$,\n>\n> If `$ s\\Rightarrow^* a t$` where `$a\\in\\Sigma_\\mathrm{terminal}$`, then\n$a\\in\\mathrm{First}_0(s)$.",
+                                    "uuid": "fd2466c7-b439-499f-8b74-454256c9a2a5",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "source": "",
+                                    "children": [
+                                        {
+                                            "type": "markdown",
+                                            "source": "The FIRST set of a string $s$ is all the terminals that might appear as the first symbol that is derived from $s$.",
+                                            "uuid": "893e3377-5214-41e2-a602-027a487014ba",
+                                            "version": 0
+                                        },
+                                        {
+                                            "type": "markdown",
+                                            "source": "c: banner\n..............\nWhat if $s\\Rightarrow^*\\epsilon$",
+                                            "uuid": "5fc2c294-4730-410c-9324-a939f360512f",
+                                            "version": 0
+                                        }
+                                    ],
+                                    "uuid": "147cb8a0-9388-40a0-8335-533753d75df5",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "b82c3dcd-f81c-4797-94ee-61ac1d3b3cd6",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- If $s\\Rightarrow^*\\epsilon$\n  > `$$\\mathrm{First}(s) = \\mathrm{First}_0(s)\\cup\\{\\epsilon\\}$$`\n- Else\n  > `$$\\mathrm{First}(s) = \\mathrm{First}_0(s)$$`",
+                                    "uuid": "8ca19c25-054c-493a-8a42-cc055113c3ce",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "So far, these characterizations of $\\mathrm{First}$ is not algorithmic.",
+                                    "uuid": "fe0159d5-9294-4343-829c-e404110a6e90",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "c5bf1196-ff96-40b7-b3e0-9f9775fdd60f",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "d15f3f57-977c-409d-b151-0d791d4d6eb8",
+                    "version": 0
+                }
+            ],
+            "uuid": "05e0ffab-7f3c-45dd-8646-b388db52ebd1",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "FOLLOW set",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math:\n............\nMotivation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- We know that if a production produces the first terminal symbol, then we choose it.\n  > This can be determined by the FIRST set of the body.\n  \n- When do we use a production that leads to $\\epsilon$?\n  > If the first terminal can follow in a sentential form.",
+                                    "uuid": "ce28d68f-f579-43fc-8d32-b43b17748be5",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/1YWJerANi2TarICyYmmJWFTccKWTzkHXu4S3RE50R8j4/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "1fe2e609-aaba-4dca-8e82-4e81c58380d7",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7a1d9782-e5aa-4be1-923f-387ac0c12d66",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "c9118a1d-7692-48ef-ac09-f268d93637f2",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n.............\nDefinition",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- `$\\mathrm{FOLLOW}_0 : \\Sigma_\\mathrm{nonterminal} \\to \\mathrm{SET}(\\Sigma_\\mathrm{terminal})$`\n> If `$S\\Rightarrow^* \\dots X a \\dots $`, then `$a\\in \\mathrm{FOLLOW}_0(X)$`\n\n",
+                                    "uuid": "3c546614-5ad4-40fd-b379-a63ebe957f13",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "- $\\mathrm{FOLLOW}$ extends $\\mathrm{FOLLOW}_0$ by considering the case if $X$ can be the last symbol of a sentential form.\n\n  > If $S\\Rightarrow^*\\dots X$, then \n  `$$\\mathrm{FOLLOW}(X) = \\mathrm{FOLLOW}_0(X) \\cup \\{$\\}$$`\n  \n",
+                                    "uuid": "29b3f0b0-c8de-41de-b2fc-27c394dd81b8",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "1b665a61-f920-44a4-a3e7-4bb0e183a0cc",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "eb688e81-0592-415b-87b3-47a02b241825",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n.....................\nLL(1): Finally",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "gravity: c\n...........\n",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "We are finally able to provide a formal definition to LL(1):\n\n> <note/>\n> A grammar $G$ is a LL(1) grammar if for any *two* productions of the form:\n  $X: s$ and $X: t$, we have:\n  - $\\mathrm{FIRST}(s) \\cap \\mathrm{FIRST}(t) = \\emptyset$\n  - If $\\epsilon\\in \\mathrm{FIRST}(s)$, then $\\mathrm{FOLLOW}(X)\\cap \\mathrm{FIRST}(t) = \\emptyset$",
+                                    "uuid": "8d5d061d-1586-4012-b506-034f943cb85a",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Why do we need these two conditions?\n\n> <note/> *Theorem*:\n> A grammar has a `select` function for its top-down parser if and only if it is LL(1).",
+                                    "uuid": "4ad404fd-f5fa-46a7-8c71-41d59330e19a",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "e0567370-c39c-4a12-b291-24f7b7f91c4c",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: banner\n..................\nConvince yourself that both conditions are necessary.",
+                                    "uuid": "98f61fb1-75aa-4a25-aa72-7620c66f5196",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2990c0a2-b2d4-4b11-91ad-a74d8fe506d4",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: center\ncss:\n  padding: 50px\n.....................\n> <note/>\n> LL(1) = **L**eft-to-right **L**eft-most with look-ahead of **1** token.",
+                                    "uuid": "864f04b7-37c9-4f39-bfc0-3215c1617a62",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "a23844ce-0a35-42c8-b895-97ec7995730d",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "048f420f-7c3c-4398-b1d7-668d3e9b8dd2",
+                    "version": 0
+                }
+            ],
+            "uuid": "ec536479-3a49-4a67-96c2-9de5144f2d94",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Algorithms for FIRST and FOLLOW",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math:\n............\nComputing FIRST",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 0",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  fontSize: 90%\n....................\n~~~\nfunction FIRST($X \\in \\Sigma$):\n|   let F = {}\n|   if X is terminal {\n|   |   F = {X}\n|   } else {\n|   |   foreach $(X \\rightarrow Y_1Y_2 \\dots Y_k) \\in G$ {\n|   |   |   if k == 0: // i.e. $Y_1 Y_2 ... Y_k = \\epsilon$\n|   |   |       F = F $\\cup\\ \\{\\epsilon\\}$\n|   |   |   else {\n|   |   |       var i = 0\n|   |   |       // look for the first $Y_i$ without $\\epsilon\\in$ FIRST($Y_i$)\n|   |   |       for i = 1 to k {\n|   |   |           F = F $\\cup$ (FIRST($Y_i$) - $\\epsilon$)\n|   |   |           if $\\epsilon\\not\\in$ FIRST($Y_i$): break\n|   |   |       }\n|   |   |       // if every $Y_i$ can derive $\\epsilon$\n|   |   |       if i == k: F = F $\\cup\\ \\{\\epsilon\\}$\n|   return F\n~~~",
+                                    "uuid": "0c921a7e-cecc-4124-b5eb-847199f190cd",
+                                    "version": 23
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  maxWidth: 200\n....................\nComputing FIRST sets for just a single symbol",
+                                    "uuid": "9abc7462-c121-4243-9e30-4bb084880f9d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7e361220-47b3-4c3b-b1ac-e347107319ee",
+                            "version": 23
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n..............\n~~~\nfunction FIRST($s\\in\\Sigma^*$):\n|   let $X_1X_2\\dots X_n = s$\n|   declare F = {}\n|   for i = 1 to n:\n|   |   F = F $\\cup$ (FIRST($X_i$) - {$\\epsilon$})\n|   |   if $\\epsilon \\not\\in$ FIRST($X_i$):\n|   |   |   break\n|   if i == n:\n|   |   $F = F\\cup\\{\\epsilon\\}$\n|   return F\n~~~",
+                                    "uuid": "49d3d935-18f4-44ec-aec0-8f9dd07d786b",
+                                    "version": 56
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  maxWidth: 200\n....................\nExtending the computation of FIRST to arbitrary strings.",
+                                    "uuid": "c969d787-97c7-48cf-a9e9-9f6fdb8087d8",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "bdd14e86-3925-41da-9f87-586b8417148e",
+                            "version": 78
+                        }
+                    ],
+                    "uuid": "c30e40a0-4a3e-446c-b47b-a94b263df7a2",
+                    "version": 101
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n................\nComputing the FOLLOW sets",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 0",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n........................\n~~~\nfunction FOLLOW-SETS(G: grammar):\n|   let S = start symbol of G\n|   let F = new HashMap of $\\Sigma_\\mathrm{nonterminal}$  $\\to$ Set[$\\Sigma_\\mathrm{terminal}$]\n|   F[S] = {\\$}\n|   loop {\n|   |   for $(X:Y_1Y_2\\dots Y_n)\\in$ G {\n|   |   |   if $Y_i$ is nonterminal {\n|   |   |   |   F[$Y_i$] = F[$Y_i$] $\\cup$ (FIRST($Y_{i+1}\\dots Y_n$)-{$\\epsilon$})\n|   |   |   |   if i == n or $\\epsilon\\in$ FIRST($Y_{i+1}\\dots Y_n$) {\n|   |   |   |   |   F[$Y_i$] = F[$Y_i$] $\\cup$ F[$X$]\n|   |   if F not updated:\n|   |   |   break\n|   return F\n~~~",
+                                    "uuid": "620c62e8-f6eb-488a-9722-04b9a4fbce2f",
+                                    "version": 36
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  maxWidth: 200\n....................\nThis procedure computes all the FOLLOW sets simultaneously.",
+                                    "uuid": "04801459-3c0d-49e1-8556-e4f69b324c78",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "2c79e509-c2d1-4006-8bcc-4e3816e464b9",
+                            "version": 36
+                        }
+                    ],
+                    "uuid": "4278909e-b276-4834-9c03-11ab03f161c9",
+                    "version": 36
+                }
+            ],
+            "uuid": "e61f0c21-0c5f-4121-96f0-424374025b2d",
+            "version": 137
+        },
+        {
+            "type": "page",
+            "source": "Predicative Parsing Table",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "The `select` function maps a nonterminal (to be derived) and a terminal (first unconsumed token in the input) to a production.\n\nWe can encode `select` as a table of productions.\n",
+                                    "uuid": "1c6e16cf-e006-457c-86ac-228b7e26150b",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "image",
+                                    "source": "",
+                                    "data": "data:image/png;base64,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",
+                                    "uuid": "402dfb67-6ff4-4e56-ab9e-f74ac8be0407",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "c1e1e35a-c998-48f0-9f4e-3ade837aa1b9",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "7e4256d1-8242-4362-90fd-7b6e52b07997",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n.................\nConstructing the predictive parsing table",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\nfunction predictive-table($G$):\n|   $M$ = new Table()\n|   for $p$ = RULES[$G$]\n|   |   $A$ = HEAD[$p$], $s$ = BODY[$p$]\n|   |   for $x\\in$ FIRST($s$):\n|   |   |   $M$[$A$, $x$] = $p$\n|   |   if $\\epsilon\\in$ FIRST($s$):\n|   |   |   for $b\\in$ FOLLOW($A$):\n|   |   |       $M[A, b] = p$\n|   return $M$\n~~~",
+                                    "uuid": "1dbdd69f-9a0e-4332-af21-e70341cf7415",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Scan through the productions.  For each production:\n- Compute the FIRST of the body\n- Compute the FOLLOW of the head\n- Update the predictive parsing table",
+                                    "uuid": "d76fd880-95b5-4eb4-a151-37f7ee12ea19",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "819e450b-f2d8-4594-ba1e-2b5a85ac234c",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "0c8be4cc-c02a-487b-8b90-ba2801f52c70",
+                    "version": 0
+                }
+            ],
+            "uuid": "3d42bc56-aeda-426a-91bb-816a8bcd6d3b",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Summary",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "math:\n..................\nFIRST & FOLLOW",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- FIRST(s) is all the terminals that can appear as the first symbol in sentences that can be derived from $s$.\n- FOLLOW(X) is all the the terminals that can follow $X$ in an sentential form of the grammar.\n- FIRST and FOLLOW are used to characterize the LL(1) grammars.",
+                                    "uuid": "64f33a3a-713d-4d8c-ab03-6d31b5e8a900",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "e241b661-3a8e-46a7-a4e8-472a9e78e654",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "7b92df7a-e6ee-44a5-83e4-31e1afc67130",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Predictive parsing table",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- A predictive parsing table can be constructed from the FIRST and FOLLOW sets.\n- The predictive parsing table is used to perform top-down parsing.",
+                                    "uuid": "79bd54aa-3630-4a4f-aeda-dc4ef81e9d8f",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "36c15799-f544-4bd0-8183-ee52ccbcf01c",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "e67f368d-08c2-4133-90a2-b713efe4402c",
+                    "version": 0
+                }
+            ],
+            "uuid": "0465fdc9-f430-4480-96cd-6041f46da3bb",
+            "version": 0
+        }
+    ],
+    "uuid": "aea31f05-f8ea-4eaa-a277-53b40edbf41b",
+    "modified": true,
+    "version": 137,
+    "history": 6
+}

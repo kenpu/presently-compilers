@@ -1,6 +1,6 @@
 {
     "type": "article",
-    "source": "draft:\n..................\nPreprocessing For Top-down Parsing",
+    "source": "\nPreprocessing For Top-down Parsing",
     "children": [
         {
             "type": "page",
@@ -19,7 +19,7 @@
                                     "type": "markdown",
                                     "source": "~~~\nglobal inputStream\nvoid X(node) {\n    a = firstToken(inputStream)\n    p = select(X, a)\n    let $A:X_1 X_2 \\dots X_k$ = p\n    for i = 1 .. k {\n      appendChild(node, new Node($X_i$))\n      if $X_i \\in \\Sigma_\\mathrm{nonterminal}$:\n          $X_i$()\n      else if $X_i$ == a:\n          inputStream.removeFirst()\n      else:\n          ERROR\n  }\n}\n~~~",
                                     "uuid": "f082c991-dbf8-4fb2-8a69-baf4d4841ea5",
-                                    "version": 4
+                                    "version": 0
                                 },
                                 {
                                     "type": "markdown",
@@ -29,11 +29,11 @@
                                 }
                             ],
                             "uuid": "4eb6d841-8c02-4b55-8a13-b7ecfce9d3dd",
-                            "version": 4
+                            "version": 0
                         }
                     ],
                     "uuid": "be3c1837-c59a-4e86-a6a4-d043f6656475",
-                    "version": 33
+                    "version": 0
                 },
                 {
                     "type": "section",
@@ -164,17 +164,17 @@
                                     "type": "markdown",
                                     "source": "~~~\narrange the nonterminals in some order $A_1$, $A_2$, ... $A_n$\n\nfor i in 1 to n {\n    for j in 1 to (i-1) {\n        look for ($A_i \\to A_j\\gamma$) \n        if found {\n            // oops, the invariance condition is violated\n            $A_j$ must have productions: $A_j: \\delta_1 | \\delta_2 | \\dots | \\delta_n$\n            replace $A_i\\to A_j\\gamma$ with $A_i: \\delta_1\\gamma | \\delta_2\\gamma | \\dots | \\delta_n\\gamma$\n        }\n    }\n    eliminate the immediate left recursions of $A_i$-productions.\n}\n~~~\n",
                                     "uuid": "98f5dd70-9e1d-4024-bef8-31fbefc6817a",
-                                    "version": 4
+                                    "version": 0
                                 },
                                 {
                                     "type": "markdown",
                                     "source": "We want to maintain a constraint on the production of the final grammar:\n\n> *Invariance condition*:\n> ***\n> $A_i : A_j s$ must be such that $j > i$.",
                                     "uuid": "76925ff7-7a07-4bb5-ae04-beb304c7ae52",
-                                    "version": 2
+                                    "version": 0
                                 }
                             ],
                             "uuid": "11eb8f09-1458-461f-b8d9-f5bbc300a3b0",
-                            "version": 34
+                            "version": 0
                         },
                         {
                             "type": "box",
@@ -185,27 +185,27 @@
                                     "type": "markdown",
                                     "source": "Why it works: \n\n- For each symbol $A_i$, we call $i$ its rank.\n- In the outer loop maintains a loop invariance:\n  > After each iteration of `for i in 1 to n`, we guarantee\n  > that for `$A_1, A_2, \\dots, A_i$` do not start with a symbol with a lower rank.\n\n---\n- So when the outer-loop terminates, each production is such that\n$A_i : A_j s$ where $j > i$.\n\n- Not possible to have left-recursion.",
                                     "uuid": "c2e899da-d612-4210-a487-949b2b179663",
-                                    "version": 617
+                                    "version": 0
                                 }
                             ],
                             "uuid": "e4ad0387-0567-47b4-8339-83306dab033e",
-                            "version": 617
+                            "version": 0
                         }
                     ],
                     "uuid": "72d84201-45b9-4c05-b197-c29bc1071e57",
-                    "version": 652
+                    "version": 0
                 }
             ],
             "uuid": "66e410e9-8b63-4174-af71-30d68726be6f",
-            "version": 686
+            "version": 0
         },
         {
             "type": "page",
-            "source": "Left factoring",
+            "source": "Left Factoring",
             "children": [
                 {
                     "type": "section",
-                    "source": "math:\n............\nDefinition",
+                    "source": "math:\n........\nDefinition",
                     "children": [
                         {
                             "type": "box",
@@ -214,25 +214,219 @@
                             "children": [
                                 {
                                     "type": "markdown",
-                                    "source": "> <note/> A grammar is left factored if no two productions with the _same_ head share a prefix.\n\nIn other words, given two productions $A: s$ and $A: t$",
-                                    "uuid": "219fbb24-a26e-423d-957c-21a1fb3edc28",
-                                    "version": 205
+                                    "source": "> <note/> A grammar $G$ is _left factored_ if given two prdouctions with the same head, the bodies of the two productions do not have a non-empty common prefix.",
+                                    "uuid": "51a0fe01-0670-4bd9-a830-4253b545236a",
+                                    "version": 0
                                 }
                             ],
-                            "uuid": "04c5aa71-11b5-44c7-a634-2bdcc8b95ef0",
-                            "version": 207
+                            "uuid": "c65f0b89-a657-4dd2-9352-975d868ef6ad",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "This is _not_ left-factored:\n```\nA : aA\n  | aB\n```",
+                                    "uuid": "c836a8d3-f2ff-4c9b-9039-7075c9937600",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "- Here we have two productions: `A: aA` and `A: aB` with the same head `A`.\n- There bodies are `aA` and `aB`.\n- The common prefix is `a`, which is _not_ empty.",
+                                    "uuid": "b3bcac50-43d4-4a9d-bdf6-47e2823f2e24",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "93525a3d-c350-4ecc-ba61-517b4d5c9923",
+                            "version": 0
                         }
                     ],
-                    "uuid": "1f49a702-0faf-4447-a511-340d6f875f1e",
-                    "version": 245
+                    "uuid": "75cd17fc-b472-4f1e-834a-10b149368fa3",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n..........\nCondition for removing immediate recursion ",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "If $A$ is immediately recursive, we assume that there is only one production of the form $A:As$.\n\n> <note/> _Theorem_: If a grammar $G$ is left-factored, then the assumption above is always true.",
+                                    "uuid": "49be4c94-0548-45b9-b492-ecbecb2de18a",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "84059418-5815-4861-80fa-e72a6c9d8b64",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "39ed2f42-38f0-4acc-a5e4-735b785bd9de",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Ambiguity in top-down parsing",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Grammars that are _not_ left-factored creates ambiguity for top-down parsers.\n\n`select : Nonterminal, Terminal -> Production`\n\n> - If `X` is not left-factored because it has two productions:\n    - `X: aA`\n    - `X: aB`\n> - `select(X, a)` = ?",
+                                    "uuid": "1d4fd60b-0ac3-4cf8-a923-99eaa44a6bc2",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "d889c33b-3a8f-45a9-afdd-5a67e8b0ce3a",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "59c42391-c1a5-49b1-95a2-9764930a2699",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n..........\nTransformation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "<pre>\n$A$ : $s$ $t_1$\n   | $s$ $t_2$\n</pre>",
+                                    "uuid": "25680c3d-16ba-4dec-98f8-d342d0b27ef4",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "transforms to",
+                                    "uuid": "e62a479f-6b79-41a4-941d-330e740eb593",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<pre>\n$A$ : $s$ $A'$\n$A'$ :  $t_1$ | $t_2$\n</pre>",
+                                    "uuid": "4663f7a0-6bf5-4ed0-8ab8-1b8a8e3d8490",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "8f6feeca-d9b7-42a7-8535-4f617f98bca2",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "f172f1df-6c2f-450f-a6f4-9b48773e160a",
+                    "version": 0
                 }
             ],
-            "uuid": "79aa89d1-ca6e-4a65-ac95-cf3165e528d0",
-            "version": 263
+            "uuid": "37baf1cd-1529-4c63-a87c-1a44c9977385",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Putting into action",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "The original grammar",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\nE : E + T\n  | E - T\n  | T\n  ;\nT : T * F\n  | T / F\n  | F\n  ;\nF : ( E )\n  | NUM\n  ;\n~~~",
+                                    "uuid": "9756a471-9b7b-4eee-8bb2-ba137fdfcdf9",
+                                    "version": 12
+                                }
+                            ],
+                            "uuid": "b50c0cf2-cc4e-4924-889c-57290d86d088",
+                            "version": 12
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Let's first perform left-factoring.\n\n~~~\nE : E A | T\nA : + T | - T\nT : T B | F\nB : * F | / F\nF : ( E ) | NUM\n~~~",
+                                    "uuid": "5db881f9-076c-4b0d-9377-02a9d97dfa5e",
+                                    "version": 10
+                                }
+                            ],
+                            "uuid": "310d9fbf-bdc3-4004-88df-6ba9fda0c196",
+                            "version": 10
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Applied the left recursion elimination.\n\n~~~\nE  : T E'\nE' : A E'  | epsilon\nT  : F T'\nT' : B T'  | epsilon\nB  : * F   | / F\nF  : ( E ) | NUM\n~~~\n",
+                                    "uuid": "a1bb8b36-9eb7-4627-b325-1dc2a7cc46c2",
+                                    "version": 5
+                                }
+                            ],
+                            "uuid": "5e935472-d4c5-4995-8f0b-4193e2111f58",
+                            "version": 5
+                        }
+                    ],
+                    "uuid": "eaca6055-b1a9-4d25-8ae7-fe11e697deb4",
+                    "version": 27
+                }
+            ],
+            "uuid": "ab18fc91-72b6-4a0b-a8be-37a72db93fea",
+            "version": 27
+        },
+        {
+            "type": "page",
+            "source": "Summary",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Left recursion leads to infinite loops in top-down parsing.\n- Left recursion can be removed by means of grammar transformation.\n- Non-left-factored grammars ",
+                                    "uuid": "699a892a-500a-4639-a4be-0c74a259007c",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "38777d58-0afc-4b67-8c70-51828ed2e9be",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "2defe324-73a6-4b3f-bac4-737049054859",
+                    "version": 0
+                }
+            ],
+            "uuid": "1d68a0dc-6415-41eb-ae66-cc39d0b6d516",
+            "version": 0
         }
     ],
     "uuid": "2e3a61ae-7968-4e9e-a1e8-2044ecf8836b",
     "modified": true,
-    "version": 950,
-    "history": 4
+    "version": 27,
+    "history": 2
 }
