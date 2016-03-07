@@ -1,6 +1,6 @@
 {
     "type": "article",
-    "source": ".................\nShift Reduce Parsing: A Bottom-up Approach",
+    "source": "draft :\n.................\nShift Reduce Parsing: A Bottom-up Approach",
     "children": [
         {
             "type": "page",
@@ -19,19 +19,19 @@
                                     "type": "markdown",
                                     "source": "- Bottom-up parsing\n- Reduction of handles\n- From Reduction to parse trees\n- Shift-reduce: a general parsing scheme\n- Stack based shift-reduce",
                                     "uuid": "ee359c90-0f2f-406d-b901-fbe42f096fb9",
-                                    "version": 178
+                                    "version": 0
                                 }
                             ],
                             "uuid": "c8dfff65-557e-45a4-80e2-ff56bea9a142",
-                            "version": 178
+                            "version": 0
                         }
                     ],
                     "uuid": "29325131-7509-4ac7-a225-fafc5bd2f70e",
-                    "version": 181
+                    "version": 0
                 }
             ],
             "uuid": "191267a7-603c-4edd-b89c-50e5e9013387",
-            "version": 211
+            "version": 0
         },
         {
             "type": "page",
@@ -50,15 +50,15 @@
                                     "type": "markdown",
                                     "source": "- Top-down parsing performs several grammar transformations, so the parse tree does not coinciden with the original grammar.\n- What if we build the tree for bottom up?",
                                     "uuid": "4a26d55d-6ae9-4ff7-bdd0-bd2799d35210",
-                                    "version": 185
+                                    "version": 0
                                 }
                             ],
                             "uuid": "5d9ddd6d-036e-4a41-9e2f-f79944ac802c",
-                            "version": 185
+                            "version": 0
                         }
                     ],
                     "uuid": "fd341a15-5edd-448c-9d37-1d32562f8365",
-                    "version": 211
+                    "version": 0
                 },
                 {
                     "type": "section",
@@ -73,15 +73,15 @@
                                     "type": "markdown",
                                     "source": "~~~\nE : E + T | T\nT : T * F | F\nF : ( E ) | num\n~~~\n\n- Left-recursive.\n- Let's try to build a parse-tree from bottom-up.",
                                     "uuid": "9c23e9f6-7b3a-419d-b15e-3329136683ef",
-                                    "version": 164
+                                    "version": 0
                                 }
                             ],
                             "uuid": "bde10861-6b2a-4744-aab2-6e23bfdaa878",
-                            "version": 164
+                            "version": 0
                         }
                     ],
                     "uuid": "d3173587-fbd7-4a41-84df-b8ce6d70fcf9",
-                    "version": 179
+                    "version": 0
                 },
                 {
                     "type": "section",
@@ -96,19 +96,19 @@
                                     "type": "markdown",
                                     "source": "Let's organize the tasks involved in parsing from bottom up.\n\n1. Maintain a _frontier_ of the tree, starting with the leaf nodes.\n2. \"Merge\" some \"part\" of the _frontier_ using a production.\n3. Repeat until the _frontier_  contains the start symbol.",
                                     "uuid": "3ad2fb43-a2d1-446f-beb6-c1c0a2ce7ead",
-                                    "version": 390
+                                    "version": 0
                                 }
                             ],
                             "uuid": "445594ea-597f-4e42-81b9-5d1df3a99575",
-                            "version": 390
+                            "version": 0
                         }
                     ],
                     "uuid": "5599ee0d-f284-4f63-9275-2d7ff19faba8",
-                    "version": 410
+                    "version": 0
                 }
             ],
             "uuid": "281fb7ee-a713-4734-9003-b0b414dbc676",
-            "version": 826
+            "version": 0
         },
         {
             "type": "page",
@@ -127,23 +127,23 @@
                                     "type": "markdown",
                                     "source": "- A **handle** is a sequence of symbols that forms the body of a production.\n- A **reduction** is merging a handle to a single nonterminal using some production.\n\n---\n\nEach reduction grows the parse tree upward by one more node.",
                                     "uuid": "bfdad71f-902b-4ec5-8fae-15f5df0ab1c1",
-                                    "version": 335
+                                    "version": 0
                                 }
                             ],
                             "uuid": "4db327ae-31f5-4d77-b65a-b6dc9fea7cbf",
-                            "version": 335
+                            "version": 0
                         }
                     ],
                     "uuid": "c97b4364-9e2f-4d5e-9ce7-be870c484992",
-                    "version": 352
+                    "version": 0
                 }
             ],
             "uuid": "84fa6630-863a-4bcb-af28-096356579ff0",
-            "version": 381
+            "version": 0
         }
     ],
     "uuid": "1d6a8bab-db93-4630-b7ce-049b5d9316ed",
     "modified": true,
-    "version": 1498,
+    "version": 11,
     "history": 6
 }

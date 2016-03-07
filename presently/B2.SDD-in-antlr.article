@@ -1,0 +1,359 @@
+{
+    "type": "article",
+    "source": "SDD in Antlr",
+    "children": [
+        {
+            "type": "page",
+            "source": "About",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Implementing S-attributed and L-attributed SDD using topdown parsing\n- Antlr actions\n- Managing complexity of Antlr grammars",
+                                    "uuid": "55df5239-3636-4b39-a08a-d0d05ee68d27",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "dc35fd6b-8896-40ee-ac31-3a9edba90ba7",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "32632f0f-9b2e-4cfe-a721-b2d2a575690a",
+                    "version": 0
+                }
+            ],
+            "uuid": "77dcbbb7-d4d6-40d8-85d4-1e90029e36c5",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "SDD using topdown parsing",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Review of SDD",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- S-attributed\n  > A semantic rule is S-attributed if the attribute derivation is bottom-up.\n- L-attributed\n  > A semantic rule is L-attributed if the attribute derivation only depends on the left-siblings or inherited attributes\n",
+                                    "uuid": "8f98acd4-30d8-48ef-9501-3c0712f8eeeb",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "- Semantic rule\n  > Unique ID for _every_ symbol in the body of a production.\n  \n- Declare _attribute_ and its computation\n  > The computation cannot create loops in the dependency graph.",
+                                    "uuid": "dc2c5aec-23c6-4174-b90c-9695c981ced1",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "16863851-0091-458f-b6e0-e2d19f815557",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "3c2d1fc4-9fe4-4906-9eac-91c1e59384c3",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n........\nReview of top-down parsing",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n..................\n<pre><code><span style=color:gray>// topdown parsing</span>\nfunction $X$() {\n  token = first token in stream\n  pick a production $X: Y_1 Y_2 \\dots$\n  expand the left-most nonterminal with $X: Y_1 Y_2 \\dots$\n  <span style=color:gray>// more details on handling $Y_k$</span>\n  for $Y_k$ {\n    $Y_k$()\n  }\n}\n</code></pre>",
+                                    "uuid": "cef593ca-1bf2-4544-984d-621145a1c224",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "22e5841e-8cb5-4af9-a8b2-e7d214528ca4",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "5672a531-8158-4115-afa5-8aeb984017d4",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n............\nComputing values with top-down parsing",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 0",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Need to compute\n- inherited attributes\n- S-attributes\n- L-attributes",
+                                    "uuid": "f7635e49-1c0a-4775-9a36-c46ae5894287",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<pre><code><span style=color:gray>// topdown parsing</span>\nfunction $X$() <span style=color:red>: S-attribute, L-attribute</span> {\n  token = first token in stream\n  pick a production $X: Y_1 Y_2 \\dots$\n  expand the left-most nonterminal with $X: Y_1 Y_2 \\dots$\n  <span style=color:gray>// more details on handling $Y_k$</span>\n  for $Y_k$ { $Y_k$() }\n  \n  <span style=color:gray>// Compute S-attribute of $X$</span>\n  <span style=color:red>$X$.S-attr = f($Y_1$.S-attr, $Y_2$.S-attr, $\\dots$) </span>\n  \n  <span style=color:gray>// Compute L-attributes of $Y_k$</span>\n  for $Y_k$ {\n    <span style=color:red>$Y_k$.L-attr = f($Y_1$.L-attr, $Y_L$.S-attr, $\\dots$, $Y_{k-1}$.L-attr)</span>\n  }\n}\n</code></pre>",
+                                    "uuid": "c01a2b05-4134-4b6a-8cba-5b40e99de3bc",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "8ab6244c-7af3-4e72-a0d0-d15c00b2a408",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "908f5164-1eb8-4303-b56b-fdf682b57c05",
+                    "version": 0
+                }
+            ],
+            "uuid": "bf75b0f7-1017-4d4a-9d1a-7dfb18d149ce",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Antlr",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Semantic rules in Antlr grammar",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Declaring the S-attribute:\n<pre><code><i>symbol</i> <span style=\"color:red\">returns</span> [ <span style=\"color:blue\"><i>type</i> <i>attribute-name</i></span> ]\n      : <i>production-rule</i>\n</code></pre>\n",
+                                    "uuid": "e78492df-115e-42ce-af49-4d4fd400f381",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "413c1bbc-227f-4920-b92f-1296cebc43c3",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Uniquely label each symbol in the body:\n\n<pre><code><i>symbol</i> <span style=\"color:red\">returns</span> [ <span style=\"color:blue\"><i>type</i> <i>attribute-name</i></span> ]\n      : ... <span style=color:blue>label</span>=<i>symbol</i> ...\n</code></pre>\n",
+                                    "uuid": "3096720c-6731-4864-8b14-ed1800d88216",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "By default, the symbol `expr` has the label of `expr`.\nHowever, if we have two `expr`'s, we need to assign them different labels, e.g.\n`e1=expr` and `e2=expr`.",
+                                    "uuid": "e88b5d8f-77ee-43da-9366-f35bae7c671a",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "75165aa5-584a-4c5d-b777-0fb99cd5c82a",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "e32f0297-40f6-41e2-a2c6-12d1c114839f",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n..............\nActions",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Action is a fragment of _valid_ code.\n- Action is treated as a _very special_ nonterminal symbol.\n  > Given some action $\\Gamma$, it only has one production\n  > $$\\Gamma : \\epsilon$$\n- So, actions do not affect the acceptance of the input.\n- Actions are used as placeholders to trigger executable code to compute\n  attributes.\n  \n",
+                                    "uuid": "2fb6aac7-91b1-4444-8a0c-3785be4b391d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "344ce1fb-aa3d-4bfd-a9f6-3e2f7ed4da68",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "76ac47f3-16d6-44db-a54a-669ad9424393",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Action in action",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Consider the following:\n\n> ```\nexpr : expr '+' expr\n     | ...\n     ;\n```",
+                                    "uuid": "1e1b1a0f-7907-4cae-9afe-4753ae67a689",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "We are just going to focus on the one production `expr '+' expr`.",
+                                    "uuid": "ea01323f-a71b-4f01-90d2-d77f1bd20c32",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "786daf07-c089-4b69-88d6-2716170fda62",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Let's label the three symbols:\n\n> ```\nexpr : e1=expr '+' e2=expr\n     | ...\n     ;\n```\n",
+                                    "uuid": "af31e3ed-6aa3-4696-b22a-941e8878d392",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Now, there are _three_ distinct labels.\n\n- `expr`\n- `e1`\n- `e2`",
+                                    "uuid": "73519a70-f5a3-4e50-96ca-38bf1a647fa5",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "9d0d345a-c335-46e8-8a55-464169e049b4",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Let's declare the S-attribute: `float val`\n\n> ```\nexpr returns [float val]\n     : e1=expr '+' e2=expr\n     | ...\n     ;\n```\n\n",
+                                    "uuid": "854696fa-7404-4c29-8af7-e7c4aeeb66b9",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7fa4eef4-0a88-44e4-be80-519aeaa3685f",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Now, let's add some code to compute `val`.\n\n> <pre><code>expr returns [float val]\n     : e1=expr '+' e2=expr <span style=color:red> {\n                            <span style=color:blue>$expr.val = $e1.val + $e2.val;</span>\n                            }</span>\n     | ...\n     ;</code></pre>",
+                                    "uuid": "da300571-888e-4f29-9321-6fac2a38faf6",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "dc838a45-8069-4e73-8fe5-452af093c72d",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Notation used in actions:\n\n- <code>$<i>label</i>.<i>attr</i></code> is the variable that holds the attribute name for the labeled syntactic variable.\n\n- Shorthand: <code>$<i>attr</i></code> is the attribute of the syntactic variable in the head of the production.\n\n> <pre><code>expr returns [float val]\n     : e1=expr '+' e2=expr <span style=color:red> {\n                            <span style=color:blue>$val = $e1.val + $e2.val;</span>\n                            }</span>\n     | ...\n     ;</code></pre>",
+                                    "uuid": "d551e418-e811-40df-98b8-a22af825edf9",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "86802c8e-1c0c-45fd-9574-3f5796287932",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Actions can be used to run any arbitrary code, not just the computation of attributes.\n\n> <pre><code>start : (expr <span style=color:red>{\n              <b>System.out.println($expr.val);</b>\n              }</span>)+\n      ;\nexpr returns [float val]\n     : e1=expr '+' e2=expr <span style=color:red> {\n                            <span style=color:blue>$val = $e1.val + $e2.val;</span>\n                            }</span>\n     | ...\n     ;</code></pre>",
+                                    "uuid": "d93ff324-866b-43ac-903c-9cb00818146d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "8fc2ae58-f7ea-4c1b-a0ff-351f4268bf39",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "ffde577e-48d7-4bfa-b14d-78555aa02cc6",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "L-attributes in Antlr",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- L-attributes require _memory_.\n- Memory requires initialization.\n- Antlr supports such memory based L-attribute computation.\n  ",
+                                    "uuid": "d51691f7-12d6-40be-86d6-0132be34de65",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "b43465d2-4db8-447c-95e1-c6a7298e1687",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n.................\n<pre><code>avg <b>returns</b> [float val]\n    <span style=color:red>locals</span><span style=color:blue>[int counter, float sum]</span>\n    @init {\n        $counter = 0;\n        $sum = 0;\n    }\n    @after {\n        $val = $sum / $counter;\n    }\n    : '[' (expr <span style=color:red>{\n                $counter += 1;\n                $sum += $expr.val;\n                }</span>)+ \n      ']'\n    ;\n</code></pre>",
+                                    "uuid": "028694a9-0917-4f2e-8215-5e94aa8ae955",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "css:\n  color: blue\n...................\n- `locals[ ... ]` declares the memory attributes only for the specific syntactic variable.\n- `@init{ ... }` initializes the local attributes.\n- `@after{ ... }` computes the S-attribute from the local memory.",
+                                    "uuid": "8be621a2-ebea-4236-851b-1628ea4ec585",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "026938c4-627e-40b8-85dc-c6d43a41cdba",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "5f82d10a-a713-4de2-9785-a967e711501c",
+                    "version": 0
+                }
+            ],
+            "uuid": "a6f2cc6c-e7f2-4f64-b5fc-8ace70d97fa6",
+            "version": 0
+        }
+    ],
+    "uuid": "c657494e-c353-4832-a788-aa366ee6a797",
+    "modified": true,
+    "version": 6,
+    "history": 5
+}
