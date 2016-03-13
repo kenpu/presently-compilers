@@ -1,6 +1,6 @@
 {
     "type": "article",
-    "source": "draft :\n.................\nShift Reduce Parsing: A Bottom-up Approach",
+    "source": ".................\nShift Reduce Parsing: A Bottom-up Approach",
     "children": [
         {
             "type": "page",
@@ -74,6 +74,12 @@
                                     "source": "~~~\nE : E + T | T\nT : T * F | F\nF : ( E ) | num\n~~~\n\n- Left-recursive.\n- Let's try to build a parse-tree from bottom-up.",
                                     "uuid": "9c23e9f6-7b3a-419d-b15e-3329136683ef",
                                     "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/13RVACkcClRhcVmw9clOohi0vKrrLbWzlyk9MZP1DrsM/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "769995ad-5527-433e-8eeb-ec0e91aaeda5",
+                                    "version": 0
                                 }
                             ],
                             "uuid": "bde10861-6b2a-4744-aab2-6e23bfdaa878",
@@ -125,7 +131,7 @@
                             "children": [
                                 {
                                     "type": "markdown",
-                                    "source": "- A **handle** is a sequence of symbols that forms the body of a production.\n- A **reduction** is merging a handle to a single nonterminal using some production.\n\n---\n\nEach reduction grows the parse tree upward by one more node.",
+                                    "source": "- The frontier of the tree is stored on a first-in-last-out _stack_.\n- A **handle** is a sequence of symbols that forms the body of a production.\n- A **reduction** is merging a handle to a single nonterminal using some production.\n\n---\n\nEach reduction grows the parse tree upward by one more node.",
                                     "uuid": "bfdad71f-902b-4ec5-8fae-15f5df0ab1c1",
                                     "version": 0
                                 }
@@ -136,14 +142,296 @@
                     ],
                     "uuid": "c97b4364-9e2f-4d5e-9ce7-be870c484992",
                     "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "General bottom-up parsing strategy",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 0",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Bottom-up parsing of a string\n",
+                                    "uuid": "a0831c6d-ee45-474d-879e-c3c25390a370",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "code",
+                                    "source": "..............\nfunction parse(Grammar, input):\n  let T = new Tree()\n  T.root_node = start_symbol(Grammar)\n  T.leaf_nodes = tokens(input)\n  frontier = T.leaf_nodes\n  while frontier != [T.root]\n      handle   = pick_handle(frontier)\n      prod     = pick_production(handle)\n      frontier = reduce(T, handle, prod)\n  return T",
+                                    "uuid": "e03098b0-f76e-44cd-8fb2-173da8be2bd2",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "7681c651-e680-46a5-bdb4-5d448bb3ca4b",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "3fced6dd-531a-455e-b1ee-904abee63789",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Shift-reduce parsing",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 2 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Can be used to process _infinite_ stream of tokens\n- Use a <span style=font-size:150%>stack</span> to hold the frontier\n- Repeatedly apply the following operations\n  1. **Shift**:\n     pushes the next token in the stream to the top of the stack.\n  2. **Reduce**: \n     pops the top `n` symbols from the stack as the _handle_.  Pick a production rule, and perform _reduction_ of the handle.\n  3. **Success**:\n     if the stack (which is the frontier) only has the start symbol *and* the input is all consumed, then we can terminate with _success_.\n  4. **Error**:\n     if the parsing cannot continue because no reduction can be done, then we raise an error.",
+                                    "uuid": "84c7ca13-d979-4325-a08e-6dc688f449e9",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "4a12c6b6-cd47-42fe-b294-6263f4eb361c",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "The execution of a shift-reduce parser is a sequence of _shift_ and _reduce_ operations that ends with either _success_ or _error_.",
+                                    "uuid": "5e1526f6-a7b1-4d81-85e1-5f39ae652995",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "f49a8f20-bea3-42c6-b232-fd9d85d3e4b4",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "b760341d-2c3e-43bf-85c8-3dc4646b4d41",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Notation of the stack",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Representing the stack:\n\n  ~~~\n  $ T * F\n  ~~~\n  - The top of the stack is `F`\n  - The bottom of the stack is marked by `$`.\n",
+                                    "uuid": "c7812d07-45c4-4c8c-8e00-542eec297835",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "- Representing the state of the input stream:\n\n  ~~~\n  a b c ... $\n  ~~~\n  - The end of input is marked by `$`.",
+                                    "uuid": "7f16fae8-7952-4fc8-a75f-dab91dda081a",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "91fc7fce-bb42-4018-8073-a234139c4641",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "image",
+                                    "source": "",
+                                    "data": "data:image/png;base64,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",
+                                    "uuid": "82c78e08-d991-4884-992c-8764326064ea",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "797da0a5-65d4-4615-9b1d-6197838ba616",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "52254a18-57be-416c-8c75-31ecf499c6eb",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "The shift-reduce operations",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w : 1 2",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Shift",
+                                    "uuid": "2a116784-25d3-4100-a55d-422bb2865140",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "code",
+                                    "source": "function SHIFT(input, stack) {\n  push(stack, pop(input))\n}",
+                                    "uuid": "93e1801c-4876-486e-8f06-f8d0bbce3212",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "c2dc997d-031d-42fc-bbd2-76295fd3cc88",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 2",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Reduce",
+                                    "uuid": "ea1a936c-7576-41c2-bfee-3e3fe79a9b64",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "code",
+                                    "source": "function REDUCE(stack, Integer n, Production p) {\n  handle = pop(stack, n)\n  assert Body(p) == handle\n  push(stack, Head(p))\n}",
+                                    "uuid": "e2620267-a574-460e-8723-87ca69c2fe15",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "d43b06e1-e556-4b35-93ed-aab6426861b5",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "354cace4-29e3-414b-af73-98c82aa7f031",
+                    "version": 0
                 }
             ],
             "uuid": "84fa6630-863a-4bcb-af28-096356579ff0",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "Properties of Shift-Reduce parsers",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Facts",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Constructs parse trees for a _right most_ derivation.\n- The stack is initialized with `$`.\n- Terminates with success if and only if the stack becomes `$S` where `S` is the start symbol **and** the input is `$`.\n",
+                                    "uuid": "27fb7a16-d6e5-46d4-99c4-89a73b7ca0ff",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "505e16f0-a345-47d9-97a5-6f395cc29505",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "2eae8772-21a0-4d56-b70a-78102f215ede",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "An example",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 1 2",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Consider the grammar:\n\n~~~\nE : E + T | T;\nT : T * F | F;\nF : ( E ) | id;\n~~~\n\nThe input is:\n\n~~~\nid * id\n~~~",
+                                    "uuid": "deca8de3-0eb5-43af-9f35-85f5623312f3",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "c: parsing\n..................\nShift-reduce parsing\n\n> | Stack    | Input     | Next operation |\n  |----------|-----------|----------------|\n  | $        | id * id $ | shift          |\n  | $ id     | * id $    | reduce F:id    |\n  | $ F      | * id $    | shift          |\n  | $ T      | * id $    | reduce T: F    |\n  | $ T *    | id $      | shift          |\n  | $ T * id | $         | reduce F: id   |\n  | $ T * F  | $         | reduce T: T * F|\n  | $ T      | $         | reduce E: T    |\n  | $ E      | $         | success        |\n\n<style>\n.parsing td {\n  text-align: center;\n  font-family: \"Ubuntu Mono\"\n}\n</style>",
+                                    "uuid": "e38433d7-6512-43e0-9120-50055cdb0ba0",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "b94500f8-d640-4dc6-9c7b-212f76023222",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "c51361ed-467e-4bcf-89c6-31a48fe63719",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Limitations of Shift-Reduce parsers",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Consider the following:\n\n~~~\nS : `if` E `then` S\n  | `if` E `then` S `else` S\n  | other\n~~~\n\nThe stack is\n~~~\n$ ... if E then if E then S\n~~~\n\nThe input stream is\n~~~\nelse ... $\n~~~",
+                                    "uuid": "2f9e777a-31e5-40e7-9803-53f580884cfd",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "There are two equally valid choices:\n\n1. shift\n2. reduce\n\nOr\n\n1. reduce (`if E then S`) `->` (`S`)\n2. shift `else ...`\n3. reduce\n\n> <note/>  Observation: shift-reduce parser cannot decide on a unique strategy when the grammar has ambiguity.",
+                                    "uuid": "d2ce6b3c-2323-4acf-a3c2-cffdefe8f4fb",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "ff8af171-e502-4dae-a833-6132a3dc8231",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "7d759dc2-6a32-4791-8c4a-156432344ba4",
+                    "version": 0
+                }
+            ],
+            "uuid": "88a3a272-4882-467d-bb7f-3f3afde959f5",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": ".................\nNext: LR parsing",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "LR parsing is a full specified parsing algorithm.\n\n- LR\n  > L = left-to-right <br>\n  > R = right-most derivation\n- Works on LR(1) languages\n  > LR(1) is strictly more powerful than LL(1) languages.",
+                                    "uuid": "6db5e6e5-4467-4a40-b1f5-75687cd718db",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "3c04f4ff-1b07-472d-987a-7133c69c85d0",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "474f4091-038c-43ac-8f09-c2d4e89cb388",
+                    "version": 0
+                }
+            ],
+            "uuid": "9831ac0c-8af5-4d95-b9cc-66298859fefd",
             "version": 0
         }
     ],
     "uuid": "1d6a8bab-db93-4630-b7ce-049b5d9316ed",
     "modified": true,
-    "version": 11,
-    "history": 6
+    "version": 3,
+    "history": 5
 }
