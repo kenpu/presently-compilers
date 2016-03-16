@@ -353,17 +353,17 @@
                                 },
                                 {
                                     "type": "markdown",
-                                    "source": "c: parsing\n..................\nShift-reduce parsing\n\n> | Stack    | Input     | Next operation |\n  |----------|-----------|----------------|\n  | $        | id * id $ | shift          |\n  | $ id     | * id $    | reduce F:id    |\n  | $ F      | * id $    | shift          |\n  | $ T      | * id $    | reduce T: F    |\n  | $ T *    | id $      | shift          |\n  | $ T * id | $         | reduce F: id   |\n  | $ T * F  | $         | reduce T: T * F|\n  | $ T      | $         | reduce E: T    |\n  | $ E      | $         | success        |\n\n<style>\n.parsing td {\n  text-align: center;\n  font-family: \"Ubuntu Mono\"\n}\n</style>",
+                                    "source": "c: parsing\n..................\nShift-reduce parsing\n\n> | Stack    | Input     | Next operation |\n  |----------|-----------|----------------|\n  | $        | id * id $ | shift          |\n  | $ id     | * id $    | reduce F:id    |\n  | $ F      | * id $    | reduce T: F    |\n  | $ T      | * id $    | shift          |\n  | $ T *    | id $      | shift          |\n  | $ T * id | $         | reduce F: id   |\n  | $ T * F  | $         | reduce T: T * F|\n  | $ T      | $         | reduce E: T    |\n  | $ E      | $         | success        |\n\n<style>\n.parsing td {\n  text-align: center;\n  font-family: \"Ubuntu Mono\"\n}\n</style>",
                                     "uuid": "e38433d7-6512-43e0-9120-50055cdb0ba0",
-                                    "version": 0
+                                    "version": 48
                                 }
                             ],
                             "uuid": "b94500f8-d640-4dc6-9c7b-212f76023222",
-                            "version": 0
+                            "version": 48
                         }
                     ],
                     "uuid": "c51361ed-467e-4bcf-89c6-31a48fe63719",
-                    "version": 0
+                    "version": 48
                 },
                 {
                     "type": "section",
@@ -396,7 +396,7 @@
                 }
             ],
             "uuid": "88a3a272-4882-467d-bb7f-3f3afde959f5",
-            "version": 0
+            "version": 48
         },
         {
             "type": "page",
@@ -432,6 +432,6 @@
     ],
     "uuid": "1d6a8bab-db93-4630-b7ce-049b5d9316ed",
     "modified": true,
-    "version": 3,
+    "version": 48,
     "history": 5
 }
