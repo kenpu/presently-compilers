@@ -1,0 +1,325 @@
+{
+    "type": "article",
+    "source": "JVM Bytecode",
+    "children": [
+        {
+            "type": "page",
+            "source": "About",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Introduction to assembler for the JVM\n- Computing model of the JVM\n- Programming with JVM bytecode",
+                                    "uuid": "34d39510-5b97-438f-97b9-a6921f7feb58",
+                                    "version": 172
+                                }
+                            ],
+                            "uuid": "4999fc13-5130-401d-ace3-ae8e490cd687",
+                            "version": 172
+                        }
+                    ],
+                    "uuid": "58564c0d-298d-4865-9dfd-ec325985a7d0",
+                    "version": 175
+                }
+            ],
+            "uuid": "a26049c2-e8d8-4e71-9ee6-16d2f42b1261",
+            "version": 185
+        },
+        {
+            "type": "page",
+            "source": "JVM",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "The computational model of JVM",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Data can be stored in\n\n- Local variables\n- Stack\n- A sequence of instructions",
+                                    "uuid": "84d59cef-b877-4106-874a-b31e5581d494",
+                                    "version": 88
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "<iframe src=\"https://docs.google.com/presentation/d/1-awYnX1TavitS4dMTzPQYsrlXcCz4rFIDZK0Irx2mOk/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"384\" height=\"413\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+                                    "uuid": "c29b3dff-8d54-4d7f-8cc2-3ff3e4177c65",
+                                    "version": 3
+                                }
+                            ],
+                            "uuid": "4ab46e12-8337-44b5-991e-523ccffbceb6",
+                            "version": 100
+                        }
+                    ],
+                    "uuid": "33425f7b-dc5f-43f5-a0e7-b051940a742c",
+                    "version": 137
+                },
+                {
+                    "type": "section",
+                    "source": "Setting up JVM environment",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "w: 0 1",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Assembly file\n- An assembler is needed ",
+                                    "uuid": "a6726d6f-df99-4382-ad1b-443a53a5070c",
+                                    "version": 86
+                                },
+                                {
+                                    "type": "code",
+                                    "source": "lang: java\n.....................\n.class public MyApp\n.super java/lang/Object\n\n.method public <init>()V\n    aload_0\n    invokenonvirtual java/lang/Object/<init>()V\n    return\n.end method\n\n.method public static main([Ljava/lang/String;)V\n    .limit stack 10\n    .limit locals 10\n    // instructions goes here\n    return\n.end method",
+                                    "uuid": "c7aba2b9-58b2-4f44-9f65-c8a2dc35d610",
+                                    "version": 73
+                                }
+                            ],
+                            "uuid": "879afa57-cf47-4462-868e-718c12c393f9",
+                            "version": 168
+                        }
+                    ],
+                    "uuid": "29af743c-4202-4222-80b2-2f1ca4909c2b",
+                    "version": 219
+                },
+                {
+                    "type": "section",
+                    "source": "Description of instructions",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "All instructions can be completely described by their effects on the stack and the local variables.\n\n> <note/> We will only focus on integer based instructions. JVM also supports floating point and array related instructions. See reference for the complete instruction listing.",
+                                    "uuid": "82210c13-0bd6-495e-bf3f-7ed022655e39",
+                                    "version": 83
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Categories:\n\n- Basic data movements\n- Arithmetics\n- Flow control\n- Method invocation\n",
+                                    "uuid": "ae35fa78-e49d-4493-99d0-590f6860f5f6",
+                                    "version": 43
+                                }
+                            ],
+                            "uuid": "b90064d9-2d8f-4ea3-badc-cd0dd89b4d80",
+                            "version": 131
+                        }
+                    ],
+                    "uuid": "e910da90-6de1-4675-9bac-c8d19666698d",
+                    "version": 171
+                }
+            ],
+            "uuid": "a24122fa-a6cf-433e-be48-a6909449bfc7",
+            "version": 538
+        },
+        {
+            "type": "page",
+            "source": "JVM Instructions",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Basic Syntax",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- `<instruction-name>`\n  > The following performs the arithmetics on the stack.\n  > ~~~\n  iadd\n  isub\n  imul\n  idiv\n  ~~~",
+                                    "uuid": "9d0d6194-c768-4255-b2f1-f44882e214a0",
+                                    "version": 165
+                                }
+                            ],
+                            "uuid": "a8e183bd-0eb5-4275-b253-d5da530589f7",
+                            "version": 166
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- `<instruction-name> <operand>`\n  > ~~~\n  istore index\n  iload index\n  ~~~",
+                                    "uuid": "2c6fe079-9623-4735-be22-213cbcf9b041",
+                                    "version": 90
+                                }
+                            ],
+                            "uuid": "747ab8c4-8f47-4675-832d-9afcea536963",
+                            "version": 91
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- `<instruction-name> <operand> <operand>`\n  > increment the local variable `index` by constant\n  > ~~~\n  iinc index constant\n  ~~~\n  > test and branch based on value on stack\n  > ~~~\n  ifeq label1 label2\n  ifgt label1 label2\n  ifle label1 label2\n  ~~~",
+                                    "uuid": "7eb5dd11-6282-41f2-9410-fda327081994",
+                                    "version": 324
+                                }
+                            ],
+                            "uuid": "e4ec0368-7ba9-47a5-8191-56d46bc54f25",
+                            "version": 324
+                        }
+                    ],
+                    "uuid": "d9b76dc0-eb53-4d36-886a-915df3311a2e",
+                    "version": 598
+                },
+                {
+                    "type": "section",
+                    "source": "Basic data movements",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- `iload <index>`\n  > loads a variable onto the top of stack\n  \n- `istore <index>`\n > pops the top of stack to a variable\n\n- `ldc <const>`\n > pushes a constant (integer / string) to the top of stack\n\n",
+                                    "uuid": "621ecdf2-6a4b-412d-b48d-12c077cb8064",
+                                    "version": 158
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "- `pop`\n\n  > removes the top of the stack\n\n- `dup`\n\n > duplicate the top of the stack",
+                                    "uuid": "33b1f099-a823-48b9-be68-8090f5f2b517",
+                                    "version": 6
+                                }
+                            ],
+                            "uuid": "64da5ecf-933e-4b7e-8581-4e0c4a9b7c57",
+                            "version": 167
+                        }
+                    ],
+                    "uuid": "6d8bd203-73f0-42ee-a3e7-0c86be18a42f",
+                    "version": 233
+                },
+                {
+                    "type": "section",
+                    "source": "Arithmetics",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- `iadd`\n\n    addes the two top of the stack and saves the result to the top of the stack.\n\n- `iand`\n- `idiv`\n- `iinc var const`\n- `imul`\n- `ineg`\n- `ishl`\n- `ishr`\n- `isub`\n- `ixor`\n",
+                                    "uuid": "70c8dafc-ee44-4744-abe9-ddd9985e1226",
+                                    "version": 4
+                                }
+                            ],
+                            "uuid": "c9ef0d9a-5da6-4887-a80a-8f0c7447bafa",
+                            "version": 4
+                        }
+                    ],
+                    "uuid": "3ec2eea0-b252-4219-9db1-8f45f4b3495f",
+                    "version": 25
+                },
+                {
+                    "type": "section",
+                    "source": "Flow control",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- consumes the top of the stack, and conditionally branch to label if the top\n  was zero.\n  > ~~~\n  ifeq label\n  ~~~\n  \n- Other branching\n  > ~~~\n  ifge label\n  ifgt label\n  ifle label\n  iflt label\n  ifne label\n  ~~~",
+                                    "uuid": "f820a6ac-6f7f-44c6-aba4-e9032cd7f358",
+                                    "version": 81
+                                }
+                            ],
+                            "uuid": "7d16d698-115f-4a8c-b6c6-34faa9996d20",
+                            "version": 82
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Consumes *two* top values off the stack.  Branch if the comparisons evaluate to true.\n  > ~~~java\n    if_icmpeq label\n    if_icmpge label\n    if_icmpgt label\n    if_icmple label\n    if_icmplt label\n    ~~~\n\n- Unconditional branching\n  > ~~~java\n    goto label\n    ~~~",
+                                    "uuid": "812de9bb-1133-4e8a-bc2b-1b478f6ea01f",
+                                    "version": 200
+                                }
+                            ],
+                            "uuid": "52613e44-cfdc-4419-8eb8-189d969279a4",
+                            "version": 200
+                        }
+                    ],
+                    "uuid": "536e9f75-e79b-401c-a86a-41ccfd5d11d1",
+                    "version": 301
+                },
+                {
+                    "type": "section",
+                    "source": "Method Invocation",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Push a method reference on top of the stack\n  > ~~~\n    getstatic <fieldname> <signature>\n    ~~~\n\n- Pops the `n`+1 values off the stack, as the argument.\n  > ~~~\n  invokevirtual <methodspec>\n  ~~~\n\n",
+                                    "uuid": "6e95d619-43c2-4301-8c67-bd13c568a1eb",
+                                    "version": 229
+                                }
+                            ],
+                            "uuid": "e10fe500-acec-466f-9557-1961160c9678",
+                            "version": 232
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Example:\n\n> ~~~\ngetstatic java/lang/System/out Ljava/io/PrintStream;\nldc \"Hello world\"\ninvokevirtual java/io/PrintStream/println(Ljava/lang/String;)V\n~~~\n",
+                                    "uuid": "f7b26a49-7af6-47e1-8218-2fa0b03cc1ec",
+                                    "version": 2
+                                }
+                            ],
+                            "uuid": "56f24e8b-8258-4439-8d59-4225410cf61b",
+                            "version": 2
+                        }
+                    ],
+                    "uuid": "19ad5aaa-063e-4f0f-90cc-2e92b650ccdd",
+                    "version": 259
+                }
+            ],
+            "uuid": "b82060ca-f4f8-44e4-a761-ed4622616dbb",
+            "version": 1451
+        }
+    ],
+    "uuid": "8310aac1-6473-4d9c-bbd9-53646225ec42",
+    "modified": false,
+    "version": 2178,
+    "history": 6
+}
