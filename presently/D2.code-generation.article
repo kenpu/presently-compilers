@@ -1,0 +1,524 @@
+{
+    "type": "article",
+    "source": "Code Generation",
+    "children": [
+        {
+            "type": "page",
+            "source": "About",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Strategy for code generation for JVM\n- Programming constructs:\n  > From syntax to instructions",
+                                    "uuid": "dc411678-15cc-42bd-b7a0-9d4b8bb54f58",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "55e138f8-0c55-4c1c-a83b-28af704dae48",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "5b1fb4a6-048a-41e9-86ed-069036be3736",
+                    "version": 0
+                }
+            ],
+            "uuid": "f3428a8d-f0aa-400a-9012-5f6c43dc9743",
+            "version": 0
+        },
+        {
+            "type": "page",
+            "source": "General Strategy",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Review",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\nLocal registers:  +---------------+\n                  | 0 | 1 | 2 | 3 | \n                  +---------------+\n                              ^\nStack      +---+              |\n           |   |  <----- instruction \n           +---+\n           |   |\n       ====+===+====\n~~~",
+                                    "uuid": "574174e1-364d-4a88-9945-73b4d3ce5cd2",
+                                    "version": 22
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "Notation:\n\n- Local variables are array-like: `LV[i]`\n- Stack is stack-like `ST[0]` is the top.",
+                                    "uuid": "8e7803a2-6ee6-4774-8418-41a235473b2d",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "df22d03d-d5e2-4218-a5f8-b1c7bafc5e1d",
+                            "version": 22
+                        }
+                    ],
+                    "uuid": "c3f85bf2-8bb1-4d72-894d-a1b333c4b691",
+                    "version": 22
+                },
+                {
+                    "type": "section",
+                    "source": "General strategy",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Distinguishes statements and expressions\n  > Languages such as Python / Java / C make a distinction between statements and expressions.\n  \n",
+                                    "uuid": "fa451a3a-5b5b-46d6-81c0-64de6b6d4d06",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "96b23ce2-5467-4020-8132-6af023e76a30",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Statements\n  > A piece of code that will perform some task, but does not evaluate to any data.\n  > ~~~\n  print \"hello world\"\n  x = x + 1\n  for( ... ) {...}\n  ~~~\n  \n",
+                                    "uuid": "af6d2e3b-2424-4108-987a-f3f8464049c0",
+                                    "version": 0
+                                },
+                                {
+                                    "type": "markdown",
+                                    "source": "- Expressions\n  > A piece of code that will evaluate to data.\n  ~~~\n  (1 + 2 * (3 + 4))\n  ~~~",
+                                    "uuid": "a7b794b9-4db8-4d42-bb1a-e8d7fd66e728",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "a658fb79-cdca-4e69-abf2-88ee1c542424",
+                            "version": 0
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Both statement and expressions will make use of *variables*.\n\n- Variables\n  > A symbol (string) that is bind to some data storage.",
+                                    "uuid": "ce8457fe-8703-43e2-a161-246f3a3b0294",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "cc7a3df4-3f3b-401f-aae8-cc9ed05a6c17",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "b70ccb65-022b-4184-9ad4-571c9716c6c1",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "Variables",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- Variables are represented a special strings in the source code: `age`, `numberOfTrailingZeros`.\n- At runtime, variables are mapped to index number of local registers.\n- During compile time, we will maintain a _symbol table_ that translates variable names to the local registers.\n\n~~~\nclass SymbolTable extends Map<String, Integer> {\n  public int resolve(String var) { ... }\n  public int declare(String var) throws Exception { ... }\n}\n~~~",
+                                    "uuid": "4dd87ddd-d677-41f6-8817-8d738d7efdce",
+                                    "version": 2
+                                }
+                            ],
+                            "uuid": "b51d9246-c710-4523-af03-b003654df502",
+                            "version": 2
+                        }
+                    ],
+                    "uuid": "a882a45a-7c22-433d-8ceb-171e7099a83a",
+                    "version": 2
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n...........\nStatement",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- A statement $S$ will be compiled list of code \n  > $$\\mathbf{C}(S) = I_1, I_2, \\dots, I_k$$\n- Before $\\mathbf{C}(S)$, we have `LV` and `ST`.\n- After $\\mathbf{C}(S)$, we must maintain `ST' = ST`.\n  > The stame is unmodified.",
+                                    "uuid": "ba94f292-df7e-466b-a167-c51ff4b13800",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "1f2022cc-983b-45c6-9c74-9e67ec37f3cb",
+                            "version": 0
+                        }
+                    ],
+                    "uuid": "365d111d-81ea-468e-93f2-3de7118b206d",
+                    "version": 0
+                },
+                {
+                    "type": "section",
+                    "source": "math:\n..............\nExpression",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "- A expression $E$ is compiled to $\\mathbf{C}(E)$.\n- Before $\\mathbf{C}(E)$, we have `LV` and `ST`.\n- The syntax of $E$ generates a _value_ `v`.\n- After $\\mathbf{C}(E)$, we have `ST' = push(ST, v)`.",
+                                    "uuid": "3741f297-a810-4514-a043-b2994a3ad788",
+                                    "version": 0
+                                }
+                            ],
+                            "uuid": "cd8e6466-3fe4-47a3-b2ad-94ef6c59f152",
+                            "version": 2
+                        }
+                    ],
+                    "uuid": "a4ed7d7d-3a11-4e34-984f-8fb8eb99312e",
+                    "version": 2
+                }
+            ],
+            "uuid": "16bb8b98-2378-4768-a3b6-6f327c44ae7d",
+            "version": 26
+        },
+        {
+            "type": "page",
+            "source": "Syntax and SDD",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "Syntax",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Program:\n\n> ~~~\nprogram \n\t: (stmt +) EOF ;\n~~~",
+                                    "uuid": "510d62a2-731e-4065-b5f4-c1f9f05ae212",
+                                    "version": 109
+                                }
+                            ],
+                            "uuid": "831289e8-6024-4b16-a2b7-e4ad4dffe23c",
+                            "version": 110
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Statements\n\n> ~~~\nstmt \n\t: declareStmt\n    | printStmt\n    | whileLoop\n    ;\n~~~",
+                                    "uuid": "4de3c1de-598a-43bd-86e5-976d6dbb8c90",
+                                    "version": 114
+                                }
+                            ],
+                            "uuid": "7eb3c568-1362-42dd-9fba-a1ac9d3d6a7e",
+                            "version": 115
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Declaration of variables\n\n>~~~\ndeclareStmt \n\t: 'let' ID '=' expr ;\n~~~",
+                                    "uuid": "0f144a81-5d7f-4a98-8f5c-220af3b94e07",
+                                    "version": 122
+                                }
+                            ],
+                            "uuid": "0e08f1d4-1d3d-4368-8e1a-940daf9a30ce",
+                            "version": 123
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Printing to console\n\n> ~~~\nprintStmt \n\t: 'print' '(' (expr ',')* expr ')' ;\n~~~",
+                                    "uuid": "c14ed4b7-5780-46c9-94ae-2796f6133212",
+                                    "version": 100
+                                }
+                            ],
+                            "uuid": "df708d23-fc8e-4e05-8ce6-52141207b1c3",
+                            "version": 101
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "While loop\n\n> ~~~\nwhileLoop \n\t: 'while' '(' cond ')' \n      '{' \n    \t(stmt+) \n      '}'\n      ;\n~~~",
+                                    "uuid": "41c46537-07d3-4531-9901-563e045f30a4",
+                                    "version": 144
+                                }
+                            ],
+                            "uuid": "eb0bcf02-092d-4182-95e5-d3cde04fea00",
+                            "version": 145
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Expression\n\n> ~~~\nexpr \n\t : ID\n     | expr * expr\n     | expr / expr\n     | expr + expr\n     | expr - expr\n     | '(' expr ')'\n     ;\n~~~\n",
+                                    "uuid": "31734ea6-1b8e-484b-a39d-39e8cb862db6",
+                                    "version": 150
+                                }
+                            ],
+                            "uuid": "b792052b-f39f-444e-9562-3bdabd58366d",
+                            "version": 151
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "Conditions\n\n> ~~~\ncond \n\t : expr '>' expr\n     | expr '<' expr\n     | expr '==' expr\n     | expr '>=' expr\n     | expr '<=' expr\n     | cond 'and' cond\n     | cond 'or' cond\n     | 'not' cond\n     | '(' cond ')'\n     ;\n~~~",
+                                    "uuid": "6c22e206-8d3c-4e45-9cae-1102ac9c1bfd",
+                                    "version": 205
+                                }
+                            ],
+                            "uuid": "4d2b4394-a785-4263-b779-f3b838ee91b2",
+                            "version": 205
+                        }
+                    ],
+                    "uuid": "13f2b608-aabf-4c73-ae1b-6e998e9bd4db",
+                    "version": 968
+                },
+                {
+                    "type": "section",
+                    "source": "Data structures",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\npublic class Instruction {\n  public String label;\n  public String opcode;\n  public List<String> args;\n  @Override public String toString() { ... };\n}\n~~~",
+                                    "uuid": "5d28efe9-b911-4531-8f01-96655ccffb76",
+                                    "version": 242
+                                }
+                            ],
+                            "uuid": "f5c459d6-9d90-4109-9a88-30c8c17ba87d",
+                            "version": 243
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\npublic class CodeFragment extends List<Instruction> {\n  ...\n}\n~~~",
+                                    "uuid": "765344af-deee-441e-a193-a0bec132033b",
+                                    "version": 81
+                                }
+                            ],
+                            "uuid": "9545f6c9-5e1f-4f6b-b2ac-ea2e41f6273e",
+                            "version": 82
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "\n~~~\nclass SymbolTable extends Map<String, Integer> {\n  public int resolve(String var) { ... }\n  public int declare(String var) throws Exception { ... }\n}\n~~~",
+                                    "uuid": "652a3677-59d8-4095-bb19-0de36150a4ab",
+                                    "version": 13
+                                }
+                            ],
+                            "uuid": "828517eb-efa9-4d1a-a739-019a38d2d13b",
+                            "version": 13
+                        }
+                    ],
+                    "uuid": "a564db27-fa70-457b-a722-f82ef83edb07",
+                    "version": 359
+                },
+                {
+                    "type": "section",
+                    "source": "SDD",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\nWe need a globally accessible symbol table.\n\n~~~\ngrammar MyLang;\n\n@members {\n  SymbolTable sym = new SymbolTable();\n}\n\n...\n~~~",
+                                    "uuid": "decf93a1-db9d-4994-8aac-a66c535889ce",
+                                    "version": 146
+                                }
+                            ],
+                            "uuid": "f8a09538-18a0-4be4-a60a-1f4305fe0cea",
+                            "version": 147
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\n~~~\nprogram returns [CodeFragment code]\n\t@init{ $code = CodeFragment.empty(); }\n\t: (stmt {$code.extend($stmt.code);})+\n    ;\n~~~",
+                                    "uuid": "95150b07-26f0-4e3b-bd3a-d1df77a7019a",
+                                    "version": 203
+                                }
+                            ],
+                            "uuid": "c2bbe88c-be79-4649-9d1c-957c4f2cc67f",
+                            "version": 206
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\n~~~\nstmt returns [CodeFragment code]\n\t@init{ $code = CodeFragment.empty(); }\n    : declareStmt {$code = $declareStmt.code;}\n    | printStmt   {$code = $printStmt.code;}\n    | whileLoop   {$code = $whileLoop.code;}\n    ;\n~~~",
+                                    "uuid": "cce8539b-7e54-4a00-97ba-d0fec2ea5d5c",
+                                    "version": 240
+                                }
+                            ],
+                            "uuid": "a6712207-651b-4c9a-a276-5861af7baba9",
+                            "version": 241
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\n~~~\ndeclareStmt returns [CodeFragment code]\n\t@init {$code = CodeFragment.empty();}\n\t: 'let' ID '=' expr \n      {\n        String varname = $ID.text;\n        assert(! this.sym.has(varname));\n        int register = this.sym.declare(varname);\n        $code.extend($expr.code);\n        $code.add(ISTORE(register));\n      };\n~~~",
+                                    "uuid": "f2410b6b-b488-4a33-ac5f-2676b143a476",
+                                    "version": 275
+                                }
+                            ],
+                            "uuid": "7503d504-dd99-41d1-955e-f28769288e9b",
+                            "version": 277
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\n~~~\nprintStmt returns [CodeFragment code]\n    @init { $code = CodeFragment.empty(); }\n\t: 'print' '(' ((e1=expr {\n                         $code.add(\"getstatic java/lang/System.out L....\");\n                         $code.extend($e1.code);\n                         $code.add(\"invokevirtual java/io/PrintStream/...\");\n                         }) ',')* \n                    e2=expr {\n                         $code.add(\"getstatic java/lang/System.out L....\");\n                         $code.extend($e2.code);\n                         $code.add(\"invokevirtual java/io/PrintStream/...\");\n                         }')' \n    ;\n~~~",
+                                    "uuid": "56eff17b-49c4-4276-977d-f4316d020dbc",
+                                    "version": 387
+                                }
+                            ],
+                            "uuid": "1a6356d1-33eb-4129-8ee0-e5529441e331",
+                            "version": 388
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\n~~~\nwhileLoop returns [CodeFragment code]\n  @init{\n    $code = CodeFragment.empty(); \n    String label = this.freshLabel();\n  }\n  : 'while' '('\n    cond {\n         $code.extend($cond.code);\n         $code.add(IFEQ(label));\n         }\n    ')' '{'\n      (stmt {\n            $code.extend($stmt.code);\n            })+\n    '}';\n    $code.add(Instruction.Label(label));\n~~~",
+                                    "uuid": "47ed981d-fd63-422a-8956-b551dda7c312",
+                                    "version": 475
+                                }
+                            ],
+                            "uuid": "42e87e96-3432-43d3-8a83-80bca7d3a83a",
+                            "version": 476
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "c: wide\n............\n\n~~~\nexpr returns [CodeFragment code]\n    @init { $code = CodeFragment.empty(); }\n    : ID { $code.add(ILOAD(this.sym.resolve($ID.text))); }\n    | e1=expr '*' e2=expr { $code.extend($e1.code);\n                            $code.extend($e2.code);\n                            $code.add(IMUL);\n                          }\n    | ...\n~~~",
+                                    "uuid": "c9f5fbd4-2dcc-458d-9939-e5a447cff5dd",
+                                    "version": 360
+                                }
+                            ],
+                            "uuid": "3c1a296f-eb51-4064-bba9-59c0bd995914",
+                            "version": 360
+                        }
+                    ],
+                    "uuid": "cf4305de-0eb6-436b-91cd-7de35a613fe0",
+                    "version": 2111
+                }
+            ],
+            "uuid": "c4d41a12-f96f-4737-a85f-d85086ea612f",
+            "version": 3462
+        },
+        {
+            "type": "page",
+            "source": "Wrapping up",
+            "children": [
+                {
+                    "type": "section",
+                    "source": "",
+                    "children": [
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "source": "",
+                            "children": [
+                                {
+                                    "type": "markdown",
+                                    "source": "~~~\nstart\n  : program \n    {\n      System.out.print($program.code);\n    }\n~~~",
+                                    "uuid": "ea0aed83-40d8-4c0f-92c8-0575f58f8404",
+                                    "version": 188
+                                }
+                            ],
+                            "uuid": "587fe79e-68da-49e3-b3fe-f193e6f22e05",
+                            "version": 189
+                        }
+                    ],
+                    "uuid": "58b40048-850e-47c7-9012-fef31e5dd484",
+                    "version": 463
+                }
+            ],
+            "uuid": "0f1c6f06-5aab-4634-bc85-25fe0ed675b5",
+            "version": 479
+        }
+    ],
+    "uuid": "6f122d76-3dd2-4119-90c0-e04e0c853221",
+    "modified": false,
+    "version": 3968,
+    "history": 6
+}
